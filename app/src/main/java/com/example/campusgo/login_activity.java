@@ -58,6 +58,7 @@ public class login_activity extends AppCompatActivity {
         forgotPassText = findViewById(R.id.forgotPassword);
 
         // Set up notification channel
+        //
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(
                     CHANNEL_ID,
