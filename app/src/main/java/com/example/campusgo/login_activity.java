@@ -41,7 +41,9 @@ public class login_activity extends AppCompatActivity {
     FirebaseDatabase database;
     FirebaseAuth auth;
 
-    private final String CHANNEL_ID = "My_notification"; // notification channel ID
+    private final String CHANNEL_ID = "My_notification";
+    // notification channel ID
+    //
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
