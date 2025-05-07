@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    android:background="@drawable/bg_3"
+    tools:context=".register_activity">
+
+    <ImageView
+        android:id="@+id/CGLogo2"
+        android:layout_width="329dp"
+        android:layout_height="279dp"
+        android:layout_marginTop="52dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/campusgo_logo_1" />
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="296dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edit_text_border"
+        android:hint="Name"
+        android:textColorHint="#c90060"
+        android:maxLength="20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/CGLogo2"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:imeOptions="actionNext"
+        android:nextFocusDown="@id/studNum"/>
+
+    <EditText
+        android:id="@+id/studNum"
+        android:layout_width="296dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/edit_text_border"
+        android:hint="Identification Number"
+        android:maxLength="20"
+        android:singleLine="true"
+        android:textColorHint="#c90060"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/username"
+        android:maxLines="1"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:imeOptions="actionNext"
+        android:nextFocusDown="@id/emailAdd"/>
+
+    <EditText
+        android:id="@+id/emailAdd"
+        android:layout_width="296dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="8dp"
+        android:inputType="textEmailAddress"
+        android:background="@drawable/edit_text_border"
+        android:hint="Email"
+        android:maxLength="40"
+        android:textColorHint="#c90060"
+        android:singleLine="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/studNum"
+        android:maxLines="1"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:imeOptions="actionNext"
+        android:nextFocusDown="@id/pass"/>
+
+    <EditText
+        android:id="@+id/pass"
+        android:layout_width="296dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/edit_text_border"
+        android:hint="Password"
+        android:textColorHint="#c90060"
+        android:inputType="textPassword"
+        android:singleLine="true"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:maxLength="20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/emailAdd"
+        android:imeOptions="actionDone"/>
+
+    <Button
+        android:id="@+id/registerBtn"
+        android:layout_width="231dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="#c90060"
+        android:text="Register"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pass" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

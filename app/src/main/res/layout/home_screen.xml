@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    android:background="@drawable/home_bg"
+    tools:context=".home_activity">
+
+    <!-- CampusGo Logo -->
+    <ImageView
+        android:id="@+id/cgLogoHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="196dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/cg_home_icon_1" />
+
+    <!-- Display Date -->
+    <TextView
+        android:id="@+id/dateToday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="404dp"
+        android:text="Date"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Display Time -->
+    <TextClock
+        android:id="@+id/timeTeller"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="404dp"
+        android:format12Hour="h:mm a"
+        android:text="Time"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.65"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/goodDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="450dp"
+        android:text="Good day!"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- QR Code Scanner -->
+    <ImageView
+        android:id="@+id/qr_icon"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="500dp"
+        android:background="@drawable/home_icons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/qr_icon" />
+
+    <!-- Campus Map -->
+    <ImageView
+        android:id="@+id/map_icon"
+        android:layout_width="73dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="500dp"
+        android:background="@drawable/home_icons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/map_icon" />
+
+    <!-- Room Availability Search -->
+    <ImageView
+        android:id="@+id/search_icon"
+        android:layout_width="76dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="500dp"
+        android:background="@drawable/home_icons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.85"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/search_icon" />
+
+    <!-- Logout Button -->
+    <Button
+        android:id="@+id/logoutBtn"
+        android:layout_width="231dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="60dp"
+        android:backgroundTint="#c90060"
+        android:text="Logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_icon" />
+</androidx.constraintlayout.widget.ConstraintLayout>
