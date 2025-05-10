@@ -11,7 +11,7 @@ import com.example.campusgo.databinding.ActivityGroundMapBinding;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ground_map extends AppCompatActivity {
+public class second_floor_map extends AppCompatActivity {
 
     private ActivityGroundMapBinding binding;
 
@@ -20,25 +20,25 @@ public class ground_map extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // Directly set the content view to the interactive_map layout file
-        setContentView(R.layout.ground_map);
+        setContentView(R.layout.second_floor_map);
 
         // Room status map using view IDs as keys
         Map<Integer, String> roomStatus = new HashMap<>();
-        roomStatus.put(R.id.scienceLab, "Available");
-        roomStatus.put(R.id.room6, "Occupied");
-        roomStatus.put(R.id.alvarado102, "Available");
-        roomStatus.put(R.id.room1, "Occupied");
-        roomStatus.put(R.id.room2, "Available");
-        roomStatus.put(R.id.room3, "Available");
-        roomStatus.put(R.id.room4, "Occupied");
+        roomStatus.put(R.id.foodLab, "Available");
+        roomStatus.put(R.id.room205a, "Available");
+        roomStatus.put(R.id.drawRoom, "Available");
+        roomStatus.put(R.id.avr, "Available");
+        roomStatus.put(R.id.cpeLab, "Available");
+        roomStatus.put(R.id.compLab1, "Available");
+        roomStatus.put(R.id.compLab2, "Available");
         roomStatus.put(R.id.nb1a, "Available");
-        roomStatus.put(R.id.nb1b, "Occupied");
+        roomStatus.put(R.id.nb1b, "Available");
+
 
         // Array of all room view IDs
         int[] roomIds = {
-                R.id.scienceLab, R.id.room6,
-                R.id.alvarado102, R.id.room1, R.id.room2, R.id.room3,
-                R.id.room4, R.id.nb1a, R.id.nb1b
+                R.id.foodLab, R.id.room205a, R.id.drawRoom, R.id.avr, R.id.cpeLab,
+                R.id.compLab1, R.id.compLab2, R.id.nb1a, R.id.nb1b
         };
 
         // Set click listener for all room buttons

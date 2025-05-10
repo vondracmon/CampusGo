@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/second_floor">
+
+
+
+    <!-- Transparent buttons for rooms -->
+
+    <Button
+        android:id="@+id/foodLab"
+        android:layout_width="131dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="260dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/room205a"
+        android:layout_width="132dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="260dp"
+        android:layout_marginTop="12dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/foodLab" />
+
+    <Button
+        android:id="@+id/drawRoom"
+        android:layout_width="132dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="260dp"
+        android:layout_marginTop="12dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/room205a" />
+
+    <Button
+        android:id="@+id/avr"
+        android:layout_width="90dp"
+        android:layout_height="108dp"
+        android:layout_marginStart="152dp"
+        android:layout_marginTop="196dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintStart_toEndOf="@id/nb1b"
+        app:layout_constraintTop_toBottomOf="@id/drawRoom" />
+
+    <Button
+        android:id="@+id/cpeLab"
+        android:layout_width="86dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/avr" />
+
+    <Button
+        android:id="@+id/compLab1"
+        android:layout_width="154dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="236dp"
+        android:layout_marginTop="52dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/compLab2"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/compLab2"
+        android:layout_width="121dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="260dp"
+        android:layout_marginTop="12dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cpeLab" />
+
+    <Button
+        android:id="@+id/nb1a"
+        android:layout_width="132dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nb1b" />
+
+    <Button
+        android:id="@+id/nb1b"
+        android:layout_width="124dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="164dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/drawRoom" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
