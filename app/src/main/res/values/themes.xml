@@ -1,0 +1,24 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.CampusGo" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your pink theme -->
+        <item name="colorPrimary">#c90060</item>
+        <item name="colorOnPrimary">#ffffff</item>
+        <item name="colorSecondary">#f8b4cc</item>
+        <item name="colorOnSecondary">#000000</item>
+        <item name="colorPrimaryContainer">#ffe4ec</item>
+        <item name="colorOnPrimaryContainer">#c90060</item>
+
+        <!-- Optional: remove default elevation overlays if they make buttons gray -->
+        <item name="materialButtonStyle">@style/CustomPinkButton</item>
+    </style>
+
+    <style name="Theme.CampusGo" parent="Base.Theme.CampusGo" />
+
+    <!-- Optional: Button style override -->
+    <style name="CustomPinkButton" parent="Widget.Material3.Button">
+        <item name="backgroundTint">#c90060</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="cornerRadius">16dp</item>
+    </style>
+</resources>

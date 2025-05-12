@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_3"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".AdminView">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Welcome Admin"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/white"
+        android:shadowColor="@color/black"
+        android:textSize="40sp"
+        android:gravity="center"
+        android:paddingBottom="20dp" />
+
+
+    <EditText
+        android:id="@+id/emailInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Email"
+        android:inputType="textEmailAddress"
+        android:padding="10dp"
+        android:background="@android:drawable/editbox_background"
+        android:textColor="@color/black" />
+
+
+    <EditText
+        android:id="@+id/passwordInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Password"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:background="@android:drawable/editbox_background"
+        android:textColor="@color/black" />
+
+    <Button
+        android:id="@+id/registerBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:backgroundTint="#c90060"
+        android:textColor="@color/white"
+        android:padding="10dp"
+        android:layout_marginTop="10dp" />
+
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:backgroundTint="#c90060"
+        android:textColor="@color/white"
+        android:padding="10dp"
+        android:layout_marginTop="10dp" />
+
+    <Button
+        android:id="@+id/updateEmailBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update Email"
+        android:backgroundTint="#c90060"
+        android:textColor="@color/white"
+        android:padding="10dp"
+        android:layout_marginTop="10dp" />
+
+    <Button
+        android:id="@+id/deleteUserBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Account"
+        android:backgroundTint="#c90060"
+        android:textColor="@color/white"
+        android:padding="10dp"
+        android:layout_marginTop="10dp" />
+
+    <Button
+        android:id="@+id/roomAvailability"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Room Availability"
+        android:backgroundTint="#c90060"
+        android:textColor="@color/white"
+        android:padding="10dp"
+        android:layout_marginTop="10dp" />
+
+    <Button
+        android:id="@+id/logoutBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:backgroundTint="#c90060"
+        android:textColor="@color/white"
+        android:padding="10dp"
+        android:layout_marginTop="10dp" />
+
+    <!-- User List Heading -->
+    <TextView
+        android:id="@+id/userListTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Registered Users"
+        android:textSize="22sp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:paddingTop="20dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/userRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:paddingTop="10dp"
+        android:scrollbars="vertical"/>
+
+</LinearLayout>
