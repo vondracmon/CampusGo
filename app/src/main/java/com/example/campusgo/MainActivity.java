@@ -13,7 +13,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
-    Button signUpBtn, loginBtn;
+    Button signUpBtn, loginBtn, temp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         signUpBtn = findViewById(R.id.signUpBtn);
         loginBtn = findViewById(R.id.loginBtn);
+        temp = findViewById(R.id.temp);
 
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +46,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        //temporary button for testing
+        temp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, uploadImage.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 }

@@ -46,10 +46,14 @@ dependencies {
     implementation(libs.firebase.firestore)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
+    implementation(libs.firebase.storage)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation(platform("com.google.firebase:firebase-bom:33.8.0"))
+
+    implementation("com.google.firebase:firebase-database:20.3.0")
+
     // Add the dependency for the Firebase Authentication library
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation("com.google.firebase:firebase-auth")
@@ -58,5 +62,8 @@ dependencies {
 
     //photo view
     implementation("com.github.chrisbanes:PhotoView:2.3.0")
+
+    //firestore
+    implementation("com.google.firebase:firebase-storage:20.3.0")
 
 }
