@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_users"
+        android:title="Manage Users" />
+    <item
+        android:id="@+id/nav_rooms"
+        android:title="Room Availability" />
+    <item
+        android:id="@+id/nav_calendar"
+        android:title="Academic Calendar" />
+    <item
+        android:id="@+id/nav_logout"
+        android:title="Logout" />
+    <item
+        android:id="@+id/settings"
+        android:title="Settings" />
+</menu>

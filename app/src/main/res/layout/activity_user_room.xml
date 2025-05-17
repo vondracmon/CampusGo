@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    android:background="@drawable/home_bg">
+
+    <ScrollView
+        android:layout_width="391dp"
+        android:layout_height="638dp"
+        android:layout_above="@id/backButton"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="-39dp"
+        android:padding="8dp">
+
+        <LinearLayout
+            android:id="@+id/main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"></LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="231dp"
+        android:layout_height="56dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="82dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="91dp"
+        android:layout_marginBottom="60dp"
+        android:backgroundTint="#c90060"
+        android:padding="10dp"
+        android:text="Back" />
+
+</RelativeLayout>

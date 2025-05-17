@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Background gradient: soft pink tones -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="linear"
+                android:startColor="#FFD6EC"
+                android:endColor="#FFB6C1"
+                android:angle="135" />
+        </shape>
+    </item>
+
+    <!-- Optional shadow overlay for subtle depth -->
+    <item android:left="0dp" android:right="0dp" android:top="0dp" android:bottom="4dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#11000000" />
+        </shape>
+    </item>
+
+</layer-list>
