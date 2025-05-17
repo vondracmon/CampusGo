@@ -88,7 +88,7 @@ public class uploadImage extends AppCompatActivity {
         try {
             Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
 
-            // Resize image to avoid Realtime Database size limits
+            // Resize image for rtdb size limit
             Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 300, 300, true);
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -101,7 +101,7 @@ public class uploadImage extends AppCompatActivity {
             // Get timestamp
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
 
-            // Upload to Realtime Database
+            // Upload to rtdb
             DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("images");
             dbRef.child(timeStamp).setValue(base64Image)
                     .addOnSuccessListener(unused -> {
