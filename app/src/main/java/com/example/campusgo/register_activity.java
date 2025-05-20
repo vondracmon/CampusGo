@@ -2,13 +2,19 @@ package com.example.campusgo;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,11 +25,20 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.ByteArrayOutputStream;
+import java.util.HashMap;
+import java.util.Map;
+
 public class register_activity extends AppCompatActivity {
-    Button registerBtn;
+
+    Button registerBtn, selectImageBtn;
     EditText username, studNum, emailAdd, pass;
+    ImageView imagePreview;
     private FirebaseAuth auth;
     private DatabaseReference databaseReference;
+
+    private Uri imageUri;
+    private String base64Image = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +49,19 @@ public class register_activity extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference("Users");
 
         registerBtn = findViewById(R.id.registerBtn);
+        selectImageBtn = findViewById(R.id.uploadImageBtn);
+        imagePreview = findViewById(R.id.imagePreview);
+
         username = findViewById(R.id.username);
         studNum = findViewById(R.id.studNum);
         emailAdd = findViewById(R.id.emailAdd);
         pass = findViewById(R.id.pass);
+
+        selectImageBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("image/*");
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
+        });
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,8 +71,8 @@ public class register_activity extends AppCompatActivity {
                 String emailAddress = emailAdd.getText().toString().trim();
                 String password = pass.getText().toString().trim();
 
-                if (userN.isEmpty() || idNum.isEmpty() || emailAddress.isEmpty() || password.isEmpty()) {
-                    Toast.makeText(register_activity.this, "Do not leave anything blank", Toast.LENGTH_SHORT).show();
+                if (userN.isEmpty() || idNum.isEmpty() || emailAddress.isEmpty() || password.isEmpty() || base64Image.isEmpty()) {
+                    Toast.makeText(register_activity.this, "Please fill all fields and upload a photo", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -57,30 +81,49 @@ public class register_activity extends AppCompatActivity {
                             @Override
                             public void onSuccess(AuthResult authResult) {
                                 String userId = auth.getCurrentUser().getUid();
-                                Users user = new Users(userN, idNum, emailAddress);
-                                databaseReference.child(userId).setValue(user)
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void unused) {
-                                                showUserDetailsDialog(userN, idNum, emailAddress, password);
-                                            }
+
+                                Map<String, Object> userMap = new HashMap<>();
+                                userMap.put("name", userN);
+                                userMap.put("email", emailAddress);
+                                userMap.put("studentNumber", idNum);
+                                userMap.put("image", base64Image);
+
+                                databaseReference.child(userId).setValue(userMap)
+                                        .addOnSuccessListener(unused -> {
+                                            showUserDetailsDialog(userN, idNum, emailAddress, password);
                                         })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(register_activity.this, "Database Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                            }
+                                        .addOnFailureListener(e -> {
+                                            Toast.makeText(register_activity.this, "Database Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                         });
                             }
                         })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(register_activity.this, "Registration Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(register_activity.this, "Registration Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         });
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            imageUri = data.getData();
+            imagePreview.setImageURI(imageUri);
+
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+                Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 300, 300, true);
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                scaledBitmap.compress(Bitmap.CompressFormat.JPEG, 60, baos);
+                byte[] imageBytes = baos.toByteArray();
+                base64Image = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(this, "Image processing error", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     private void showUserDetailsDialog(String username, String studNum, String email, String password) {
