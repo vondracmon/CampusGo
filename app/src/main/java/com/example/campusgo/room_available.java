@@ -67,6 +67,7 @@ public class room_available extends AppCompatActivity {
 
                     TextView tvRoom = roomView.findViewById(R.id.roomNumber);
                     TextView tvAvailability = roomView.findViewById(R.id.availablility);
+                    TextView tvMarkedBy = roomView.findViewById(R.id.markedByText);
                     Switch switchStatus = roomView.findViewById(R.id.statusSwitch);
 
                     tvRoom.setText(room.getRoom());
@@ -75,6 +76,7 @@ public class room_available extends AppCompatActivity {
                     if (isAdmin) {
                         switchStatus.setVisibility(View.VISIBLE);
                         switchStatus.setChecked(room.getAvailability().equals("Available"));
+                        tvMarkedBy.setVisibility(View.GONE);
 
                         switchStatus.setOnCheckedChangeListener((buttonView, isChecked) -> {
                             String newStatus = isChecked ? "Available" : "In Class";
@@ -85,7 +87,7 @@ public class room_available extends AppCompatActivity {
                                     .addOnSuccessListener(unused -> Toast.makeText(this, "Updated!", Toast.LENGTH_SHORT).show())
                                     .addOnFailureListener(e -> Toast.makeText(this, "Failed to update", Toast.LENGTH_SHORT).show());
 
-                            // get admin who set it to "In Class"
+                            // Track admin who set room to "In Class"
                             if (!isChecked && username != null) {
                                 roomRef.child(room.getRoom()).child("markedBy").setValue(username);
                             } else if (isChecked) {
@@ -94,6 +96,14 @@ public class room_available extends AppCompatActivity {
                         });
                     } else {
                         switchStatus.setVisibility(View.GONE);
+
+                        // Show 'markedBy' if the room is not available
+                        if (!room.getAvailability().equals("Available") && room.getMarkedBy() != null) {
+                            tvMarkedBy.setText("Marked by: " + room.getMarkedBy());
+                            tvMarkedBy.setVisibility(View.VISIBLE);
+                        } else {
+                            tvMarkedBy.setVisibility(View.GONE);
+                        }
                     }
 
                     mainLayout.addView(roomView);

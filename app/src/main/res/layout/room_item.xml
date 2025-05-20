@@ -29,15 +29,32 @@
             android:layout_height="wrap_content"
             android:text="Status"
             android:textColor="#333"
-            android:layout_marginTop="4dp" />
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp" />
 
-        <Switch
-            android:id="@+id/statusSwitch"
+        <TextView
+            android:id="@+id/markedByText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Toggle Availability"
-            android:layout_marginTop="8dp"
+            android:text="Marked by"
             android:visibility="visible" />
+
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <Switch
+                android:id="@+id/statusSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Toggle Availability"
+                android:layout_gravity="center"
+                android:visibility="visible" />
+        </FrameLayout>
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>
