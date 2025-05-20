@@ -39,6 +39,7 @@ public class AdminView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_view);
 
+        // Setup UI components
         drawerLayout = findViewById(R.id.drawer_layout);
         navView = findViewById(R.id.nav_view);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -50,6 +51,7 @@ public class AdminView extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
+        // Init inputs & buttons
         emailInput = findViewById(R.id.emailInput);
         passwordInput = findViewById(R.id.passwordInput);
         registerBtn = findViewById(R.id.registerBtn);
@@ -59,22 +61,27 @@ public class AdminView extends AppCompatActivity {
         logoutBtn = findViewById(R.id.logoutBtn);
         userRecyclerView = findViewById(R.id.userRecyclerView);
 
+        // Firebase
         auth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference("Users");
 
+        // Setup RecyclerView
         userList = new ArrayList<>();
         userAdapter = new UserAdapter(userList);
         userRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         userRecyclerView.setAdapter(userAdapter);
 
+        // Load existing users
         fetchUsers();
 
+        // Button listeners
         registerBtn.setOnClickListener(v -> registerUser());
         loginBtn.setOnClickListener(v -> loginUser());
         updateEmailBtn.setOnClickListener(v -> updateEmail());
         deleteUserBtn.setOnClickListener(v -> deleteUser());
         logoutBtn.setOnClickListener(v -> logoutUser());
 
+        // Navigation drawer logic
         navView.setNavigationItemSelectedListener(item -> {
             drawerLayout.closeDrawer(GravityCompat.START);
             int id = item.getItemId();
@@ -83,7 +90,7 @@ public class AdminView extends AppCompatActivity {
                 Toast.makeText(this, "Manage Users", Toast.LENGTH_SHORT).show();
             } else if (id == R.id.nav_rooms) {
                 Intent intent = new Intent(this, room_available.class);
-                intent.putExtra("isAdmin", true); // ✅ tell room screen admin is true
+                intent.putExtra("isAdmin", true);
                 startActivity(intent);
             } else if (id == R.id.nav_calendar) {
                 startActivity(new Intent(this, AdminCalendar.class));
@@ -132,7 +139,7 @@ public class AdminView extends AppCompatActivity {
                 .addOnSuccessListener(authResult -> {
                     Toast.makeText(this, "Logged in Successfully!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this, room_available.class);
-                    intent.putExtra("isAdmin", true); // ✅ hardcoded admin
+                    intent.putExtra("isAdmin", true);
                     startActivity(intent);
                     finish();
                 })

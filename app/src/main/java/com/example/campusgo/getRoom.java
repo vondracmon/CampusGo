@@ -3,12 +3,18 @@ package com.example.campusgo;
 public class getRoom {
     private String room;
     private String availability;
+    private String markedBy;
 
     public getRoom() {} // Needed for Firebase
 
-    public getRoom(String room, String availability) {
+    public getRoom(String room, String availability, String markedBy) {
         this.room = room;
         this.availability = availability;
+        this.markedBy = markedBy;
+    }
+
+    public String getMarkedBy() {
+        return markedBy;
     }
 
     public String getRoom() {
@@ -17,6 +23,10 @@ public class getRoom {
 
     public String getAvailability() {
         return availability;
+    }
+
+    public void setMarkedBy(String markedBy) {
+        this.markedBy = markedBy;
     }
 
     public void setRoom(String room) {
