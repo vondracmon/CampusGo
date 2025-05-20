@@ -16,7 +16,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="260dp"
         android:layout_marginTop="16dp"
-        android:background="@android:color/black"
+        android:background="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,7 +26,7 @@
         android:layout_height="44dp"
         android:layout_marginStart="260dp"
         android:layout_marginTop="12dp"
-        android:background="@android:color/black"
+        android:background="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/foodLab" />
 
@@ -36,7 +36,7 @@
         android:layout_height="43dp"
         android:layout_marginStart="260dp"
         android:layout_marginTop="12dp"
-        android:background="@android:color/black"
+        android:background="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/room205a" />
 
@@ -46,7 +46,7 @@
         android:layout_height="108dp"
         android:layout_marginStart="152dp"
         android:layout_marginTop="196dp"
-        android:background="@android:color/black"
+        android:background="@android:color/transparent"
         app:layout_constraintStart_toEndOf="@id/nb1b"
         app:layout_constraintTop_toBottomOf="@id/drawRoom" />
 
@@ -56,7 +56,7 @@
         android:layout_height="42dp"
         android:layout_marginStart="300dp"
         android:layout_marginTop="16dp"
-        android:background="@android:color/black"
+        android:background="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/avr" />
 
@@ -66,7 +66,7 @@
         android:layout_height="56dp"
         android:layout_marginStart="236dp"
         android:layout_marginTop="52dp"
-        android:background="@android:color/black"
+        android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/compLab2"
@@ -78,7 +78,7 @@
         android:layout_height="54dp"
         android:layout_marginStart="260dp"
         android:layout_marginTop="12dp"
-        android:background="@android:color/black"
+        android:background="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cpeLab" />
 
@@ -88,7 +88,7 @@
         android:layout_height="44dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:background="@android:color/black"
+        android:background="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/nb1b" />
 
@@ -98,7 +98,7 @@
         android:layout_height="44dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="164dp"
-        android:background="@color/black"
+        android:background="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/drawRoom" />
 

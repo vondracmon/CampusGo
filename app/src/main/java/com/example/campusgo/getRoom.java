@@ -2,26 +2,28 @@ package com.example.campusgo;
 
 public class getRoom {
     private String room;
-    private String availablity;
+    private String availability;
 
-    public getRoom(String room, String availablity) {
+    public getRoom() {} // Needed for Firebase
+
+    public getRoom(String room, String availability) {
         this.room = room;
-        this.availablity = availablity;
+        this.availability = availability;
     }
 
     public String getRoom() {
         return room;
     }
 
-    public String getAvailablity() {
-        return availablity;
-    }
-
-    public void setAvailablity(String availablity) {
-        this.availablity = availablity;
+    public String getAvailability() {
+        return availability;
     }
 
     public void setRoom(String room) {
         this.room = room;
+    }
+
+    public void setAvailability(String availability) {
+        this.availability = availability;
     }
 }

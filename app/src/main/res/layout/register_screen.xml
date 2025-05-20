@@ -22,7 +22,7 @@
     <EditText
         android:id="@+id/username"
         android:layout_width="296dp"
-        android:layout_height="55dp"
+        android:layout_height="45dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/edit_text_border"
         android:hint="Name"
@@ -41,7 +41,7 @@
     <EditText
         android:id="@+id/studNum"
         android:layout_width="296dp"
-        android:layout_height="55dp"
+        android:layout_height="45dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/edit_text_border"
         android:hint="Identification Number"
@@ -60,7 +60,7 @@
     <EditText
         android:id="@+id/emailAdd"
         android:layout_width="296dp"
-        android:layout_height="55dp"
+        android:layout_height="45dp"
         android:layout_marginTop="8dp"
         android:inputType="textEmailAddress"
         android:background="@drawable/edit_text_border"
@@ -80,7 +80,7 @@
     <EditText
         android:id="@+id/pass"
         android:layout_width="296dp"
-        android:layout_height="55dp"
+        android:layout_height="45dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/edit_text_border"
         android:hint="Password"
@@ -96,14 +96,25 @@
         android:imeOptions="actionDone"/>
 
     <Button
+        android:id="@+id/uploadImageBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upload Image"
+        app:layout_constraintTop_toBottomOf="@id/pass"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
+
+    <Button
         android:id="@+id/registerBtn"
-        android:layout_width="231dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="50dp"
-        android:backgroundTint="#c90060"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp"
         android:text="Register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/pass" />
+        app:layout_constraintTop_toBottomOf="@id/uploadImageBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
