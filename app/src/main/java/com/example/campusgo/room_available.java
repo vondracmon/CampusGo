@@ -8,14 +8,19 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
 
 public class room_available extends AppCompatActivity {
 
-    private boolean isAdmin = false; // 🔧 default false
+    private boolean isAdmin = false;
     private LinearLayout mainLayout;
     private DatabaseReference roomRef;
+    private FirebaseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,17 +29,31 @@ public class room_available extends AppCompatActivity {
 
         mainLayout = findViewById(R.id.main);
         roomRef = FirebaseDatabase.getInstance().getReference("rooms");
-
-        // 🔧 get admin flag from intent
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
         isAdmin = getIntent().getBooleanExtra("isAdmin", false);
-
-        fetchRooms();
 
         Button backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(v -> onBackPressed());
+
+        if (currentUser != null && isAdmin) {
+            DatabaseReference userRef = FirebaseDatabase.getInstance()
+                    .getReference("Users")
+                    .child(currentUser.getUid())
+                    .child("username");
+
+            userRef.get().addOnSuccessListener(dataSnapshot -> {
+                String username = dataSnapshot.getValue(String.class);
+                fetchRooms(username);
+            }).addOnFailureListener(e -> {
+                Toast.makeText(this, "Failed to fetch username", Toast.LENGTH_SHORT).show();
+                fetchRooms("Unknown");
+            });
+        } else {
+            fetchRooms(null); // for non-admin users
+        }
     }
 
-    private void fetchRooms() {
+    private void fetchRooms(String username) {
         mainLayout.removeAllViews();
         LayoutInflater inflater = LayoutInflater.from(this);
 
@@ -60,12 +79,21 @@ public class room_available extends AppCompatActivity {
                         switchStatus.setOnCheckedChangeListener((buttonView, isChecked) -> {
                             String newStatus = isChecked ? "Available" : "In Class";
                             tvAvailability.setText(newStatus);
+
+                            // Update room availability
                             roomRef.child(room.getRoom()).child("availability").setValue(newStatus)
                                     .addOnSuccessListener(unused -> Toast.makeText(this, "Updated!", Toast.LENGTH_SHORT).show())
                                     .addOnFailureListener(e -> Toast.makeText(this, "Failed to update", Toast.LENGTH_SHORT).show());
+
+                            // get admin who set it to "In Class"
+                            if (!isChecked && username != null) {
+                                roomRef.child(room.getRoom()).child("markedBy").setValue(username);
+                            } else if (isChecked) {
+                                roomRef.child(room.getRoom()).child("markedBy").removeValue();
+                            }
                         });
                     } else {
-                        switchStatus.setVisibility(View.GONE); // hide switch for non-admin
+                        switchStatus.setVisibility(View.GONE);
                     }
 
                     mainLayout.addView(roomView);
