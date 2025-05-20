@@ -1,3 +1,4 @@
+
 package com.example.campusgo;
 
 import android.app.ProgressDialog;
@@ -88,7 +89,7 @@ public class uploadImage extends AppCompatActivity {
         try {
             Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
 
-            // Resize image for rtdb size limit
+            // Resize image to avoid Realtime Database size limits
             Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 300, 300, true);
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -101,7 +102,7 @@ public class uploadImage extends AppCompatActivity {
             // Get timestamp
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
 
-            // Upload to rtdb
+            // Upload to Realtime Database
             DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("images");
             dbRef.child(timeStamp).setValue(base64Image)
                     .addOnSuccessListener(unused -> {

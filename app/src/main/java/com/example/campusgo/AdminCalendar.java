@@ -43,7 +43,7 @@ public class AdminCalendar extends AppCompatActivity {
         eventTitle = findViewById(R.id.eventTitle);
         eventsRecyclerView = findViewById(R.id.eventsRecyclerView);
         fabAddEvent = findViewById(R.id.fabAddEvent);
-//testing
+
         // Setup RecyclerView
         adapter = new EventAdapter(eventList);
         eventsRecyclerView.setLayoutManager(new LinearLayoutManager(this));

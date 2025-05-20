@@ -8,17 +8,17 @@
     tools:context=".qr"
     android:background="@drawable/home_bg">
 
+    <!-- Profile Info -->
     <LinearLayout
         android:id="@+id/profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="16dp"
+        android:gravity="center_vertical"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:gravity="center_vertical">
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
             android:id="@+id/profile_image"
@@ -26,65 +26,94 @@
             android:layout_height="100dp"
             android:src="@drawable/human_icon"
             android:contentDescription="Profile Picture"
-            android:layout_marginEnd="16dp"/>
+            android:layout_marginEnd="16dp" />
 
         <LinearLayout
             android:orientation="vertical"
-            android:gravity="center_vertical"
-            android:layout_height="500px"
-            android:layout_width="500px">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
 
             <TextView
                 android:id="@+id/profile_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Bogart D. Explorer"
+                android:text="User Name"
                 android:textSize="18sp"
                 android:textColor="@android:color/white"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/profile_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2022400069"
+                android:text="User ID"
                 android:textSize="14sp"
-                android:textColor="@android:color/white"/>
+                android:textColor="@android:color/white" />
         </LinearLayout>
     </LinearLayout>
 
-
+    <!-- QR Code -->
     <LinearLayout
         android:id="@+id/qr_code"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:padding="16dp"
         app:layout_constraintTop_toBottomOf="@id/profile"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:padding="16dp">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- QR Code Image -->
         <ImageView
             android:id="@+id/qr_image"
             android:layout_width="300dp"
             android:layout_height="300dp"
-            android:src="@drawable/qrr"
-            android:contentDescription="QR Code"/>
+            android:contentDescription="QR Code"
+            android:scaleType="fitCenter" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/button_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/qr_code"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/download_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Download"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="#b1d8ff"
+            android:textColor="@android:color/black" />
+
+        <Button
+            android:id="@+id/share_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Share"
+            android:backgroundTint="#b1d8ff"
+            android:textColor="@android:color/black" />
     </LinearLayout>
 
-    <!-- Back Button Section -->
+
+    <!-- Back Button -->
     <Button
         android:id="@+id/back_button"
         android:layout_width="231dp"
         android:layout_height="56dp"
+        android:layout_marginBottom="32dp"
         android:layout_marginTop="50dp"
         android:backgroundTint="#c90060"
         android:text="Back"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginBottom="32dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
