@@ -1,10 +1,17 @@
 <resources>
     <string name="app_name">CampusGo</string>
     <string name="default_web_client">286018218589-572dpo07p08utghb1ucqbm0o9l7m9tgm.apps.googleusercontent.com</string>
+
+    <!-- Navigation drawer -->
     <string name="navigation_drawer_open">Open Navigation Drawer</string>
     <string name="navigation_drawer_close">Close Navigation Drawer</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Navigation fragment labels -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
 
+    <!-- Placeholder -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
