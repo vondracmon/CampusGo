@@ -20,7 +20,7 @@ public class ground_map extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // Directly set the content view to the interactive_map layout file
-        setContentView(R.layout.ground_map);
+        setContentView(R.layout.activity_ground_map);
 
         // Room status map using view IDs as keys
         Map<Integer, String> roomStatus = new HashMap<>();

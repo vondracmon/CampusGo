@@ -5,7 +5,6 @@ import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -21,28 +20,22 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class login_activity extends AppCompatActivity {
     Button loginBtn, googleLoginBtn;
     EditText IdOrEmail, pass;
     TextView forgotPassText;
     GoogleSignInClient gsc;
-    FirebaseDatabase database;
     FirebaseAuth auth;
 
-    private final String CHANNEL_ID = "My_notification";// notification channel ID
-
+    private final String CHANNEL_ID = "My_notification"; // notification channel ID
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +43,6 @@ public class login_activity extends AppCompatActivity {
         setContentView(R.layout.login_screen);
 
         auth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance();
 
         loginBtn = findViewById(R.id.loginBtn);
         googleLoginBtn = findViewById(R.id.googleLoginBtn);
@@ -59,7 +51,6 @@ public class login_activity extends AppCompatActivity {
         forgotPassText = findViewById(R.id.forgotPassword);
 
         // Set up notification channel
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(
                     CHANNEL_ID,
@@ -85,9 +76,22 @@ public class login_activity extends AppCompatActivity {
             } else {
                 auth.signInWithEmailAndPassword(email, password)
                         .addOnSuccessListener(authResult -> {
-                            Toast.makeText(login_activity.this, "Logged in Successfully!", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(login_activity.this, home_activity.class));
-                            finish();
+                            FirebaseUser user = auth.getCurrentUser();
+                            if (user != null) {
+                                DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
+                                userRef.child("role").get().addOnCompleteListener(task -> {
+                                    if (task.isSuccessful()) {
+                                        if (task.getResult().getValue(String.class) == null) {
+                                            userRef.child("role").setValue("user");
+                                        }
+                                        Toast.makeText(login_activity.this, "Logged in Successfully!", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(login_activity.this, home_activity.class));
+                                        finish();
+                                    } else {
+                                        Toast.makeText(login_activity.this, "Error checking role: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
                         })
                         .addOnFailureListener(e -> {
                             Toast.makeText(login_activity.this, "Login Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -165,11 +169,28 @@ public class login_activity extends AppCompatActivity {
                         users.setStudNum("000000");
                         users.setEmail(user.getEmail());
 
-                        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users");
-                        userRef.child(user.getUid()).setValue(users);
-
-                        startActivity(new Intent(login_activity.this, home_activity.class));
-                        finish();
+                        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
+                        userRef.setValue(users).addOnCompleteListener(setValueTask -> {
+                            if (setValueTask.isSuccessful()) {
+                                userRef.child("role").get().addOnCompleteListener(roleTask -> {
+                                    if (roleTask.isSuccessful()) {
+                                        if (roleTask.getResult().getValue(String.class) == null) {
+                                            userRef.child("role").setValue("user").addOnCompleteListener(roleSetTask -> {
+                                                startActivity(new Intent(login_activity.this, home_activity.class));
+                                                finish();
+                                            });
+                                        } else {
+                                            startActivity(new Intent(login_activity.this, home_activity.class));
+                                            finish();
+                                        }
+                                    } else {
+                                        Toast.makeText(login_activity.this, "Error checking role: " + roleTask.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            } else {
+                                Toast.makeText(login_activity.this, "Failed to save user data: " + setValueTask.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     } else {
                         Toast.makeText(login_activity.this, "Authentication Error", Toast.LENGTH_SHORT).show();
                     }

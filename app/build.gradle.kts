@@ -35,6 +35,7 @@ android {
     }
 }
 
+
 dependencies {
 
     implementation(libs.appcompat)
@@ -51,19 +52,22 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation(platform("com.google.firebase:firebase-bom:33.8.0"))
-
-    implementation("com.google.firebase:firebase-database:20.3.0")
-
     // Add the dependency for the Firebase Authentication library
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation("com.google.firebase:firebase-auth")
     // Also add the dependency for the Google Play services library and specify its version
     implementation("com.google.android.gms:play-services-auth:21.3.0")
+    implementation ("com.google.zxing:core:3.5.1")
+    implementation ("com.journeyapps:zxing-android-embedded:4.3.0")
+    implementation("mysql:mysql-connector-java:5.1.49")
+    implementation ("androidx.cardview:cardview:1.0.0")
+    implementation ("com.google.firebase:firebase-database:20.3.0")
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
+    implementation ("androidx.fragment:fragment:1.8.6")
 
-    //photo view
-    implementation("com.github.chrisbanes:PhotoView:2.3.0")
+}
 
-    //firestore
-    implementation("com.google.firebase:firebase-storage:20.3.0")
-
+tasks.withType<JavaCompile>().configureEach {
+    options.compilerArgs.add("-Xlint:deprecation")
 }

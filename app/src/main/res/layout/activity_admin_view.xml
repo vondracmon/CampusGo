@@ -1,126 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg_3"
-    android:orientation="vertical"
-    android:padding="20dp"
-    tools:context=".AdminView">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/title"
+    <!-- Main content -->
+    <LinearLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Welcome Admin"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="@color/white"
-        android:shadowColor="@color/black"
-        android:textSize="40sp"
-        android:gravity="center"
-        android:paddingBottom="20dp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="12dp"
+        android:background="#F7F7F7">
 
+        <!-- Toolbar -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:title="Admin Panel"
+            android:titleTextColor="@android:color/white" />
 
-    <EditText
-        android:id="@+id/emailInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Email"
-        android:inputType="textEmailAddress"
-        android:padding="10dp"
-        android:background="@android:drawable/editbox_background"
-        android:textColor="@color/black" />
+        <!-- Email Input -->
+        <EditText
+            android:id="@+id/emailInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:padding="8dp"
+            android:layout_marginBottom="6dp" />
 
+        <!-- Password Input -->
+        <EditText
+            android:id="@+id/passwordInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:padding="8dp"
+            android:layout_marginBottom="12dp"
+            android:inputType="textPassword" />
 
-    <EditText
-        android:id="@+id/passwordInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Password"
-        android:inputType="textPassword"
-        android:padding="10dp"
-        android:background="@android:drawable/editbox_background"
-        android:textColor="@color/black" />
+        <!-- Register/Login Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="8dp">
 
-    <Button
-        android:id="@+id/registerBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Register"
-        android:backgroundTint="#c90060"
-        android:textColor="@color/white"
-        android:padding="10dp"
-        android:layout_marginTop="10dp" />
+            <Button
+                android:id="@+id/registerBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Register" />
 
-    <Button
-        android:id="@+id/loginBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:backgroundTint="#c90060"
-        android:textColor="@color/white"
-        android:padding="10dp"
-        android:layout_marginTop="10dp" />
+            <Button
+                android:id="@+id/loginBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Login"
+                android:layout_marginStart="6dp" />
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/updateEmailBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Update Email"
-        android:backgroundTint="#c90060"
-        android:textColor="@color/white"
-        android:padding="10dp"
-        android:layout_marginTop="10dp" />
+        <!-- Update/Delete Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="8dp">
 
-    <Button
-        android:id="@+id/deleteUserBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Delete Account"
-        android:backgroundTint="#c90060"
-        android:textColor="@color/white"
-        android:padding="10dp"
-        android:layout_marginTop="10dp" />
+            <Button
+                android:id="@+id/updateEmailBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Update Email" />
 
-    <Button
-        android:id="@+id/roomAvailability"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Room Availability"
-        android:backgroundTint="#c90060"
-        android:textColor="@color/white"
-        android:padding="10dp"
-        android:layout_marginTop="10dp" />
+            <Button
+                android:id="@+id/deleteUserBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Delete User"
+                android:layout_marginStart="6dp" />
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/logoutBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Logout"
-        android:backgroundTint="#c90060"
-        android:textColor="@color/white"
-        android:padding="10dp"
-        android:layout_marginTop="10dp" />
+        <!-- Logout -->
+        <Button
+            android:id="@+id/logoutBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:layout_marginBottom="8dp" />
 
-    <!-- User List Heading -->
-    <TextView
-        android:id="@+id/userListTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Registered Users"
-        android:textSize="22sp"
-        android:textColor="@color/white"
-        android:gravity="center"
-        android:paddingTop="20dp" />
+        <!-- RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/userRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/userRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:paddingTop="10dp"
-        android:scrollbars="vertical"/>
-
-</LinearLayout>
+    <!-- Navigation Drawer -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/nav_header"
+        android:background="@drawable/nav_drawer_background"
+        app:menu="@menu/admin_drawer_menu" />
+</androidx.drawerlayout.widget.DrawerLayout>

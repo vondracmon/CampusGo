@@ -1,87 +1,78 @@
 package com.example.campusgo;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
-
-import androidx.activity.EdgeToEdge;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-import java.util.ArrayList;
+import com.google.firebase.database.*;
 
 public class room_available extends AppCompatActivity {
-    // List to store the room data
-    ArrayList<getRoom> getroom = new ArrayList<>();
 
-    @SuppressLint("MissingInflatedId")
+    private boolean isAdmin = false; // 🔧 default false
+    private LinearLayout mainLayout;
+    private DatabaseReference roomRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_room_available); // Main layout containing the 'main' LinearLayout
+        setContentView(R.layout.activity_room_available);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        mainLayout = findViewById(R.id.main);
+        roomRef = FirebaseDatabase.getInstance().getReference("rooms");
 
-        loadData();
+        // 🔧 get admin flag from intent
+        isAdmin = getIntent().getBooleanExtra("isAdmin", false);
 
-        LinearLayout mainLayout = findViewById(R.id.main);
-        LayoutInflater inflater = getLayoutInflater();
+        fetchRooms();
 
-        for (int i = 0; i < getroom.size(); i++) {
-
-            View roomView = inflater.inflate(R.layout.room_item, mainLayout, false);
-
-            TextView tvRoomNumber = roomView.findViewById(R.id.roomNumber);
-            tvRoomNumber.setText(getroom.get(i).getRoom());
-
-            TextView tvAvailability = roomView.findViewById(R.id.availablility);
-            tvAvailability.setText(getroom.get(i).getAvailablity());
-
-            mainLayout.addView(roomView);
-
-            Button backButton = findViewById(R.id.backButton);
-            backButton.setOnClickListener(v -> {
-                onBackPressed();
-            });
-
-        }
+        Button backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(v -> onBackPressed());
     }
 
-    private void loadData() {
-        getroom.add(new getRoom("Room 1", "Available"));
-        getroom.add(new getRoom("Room 2", "Available"));
-        getroom.add(new getRoom("Room 3", "In Class"));
-        getroom.add(new getRoom("Room 4", "Available"));
-        getroom.add(new getRoom("Alvarado 102", "Available"));
-        getroom.add(new getRoom("Room 6", "Available"));
-        getroom.add(new getRoom("Science Laboratory", "In Class"));
-        getroom.add(new getRoom("NB1A", "Available"));
-        getroom.add(new getRoom("NB1B", "In Class"));
-        getroom.add(new getRoom("Computer Laboratory 1", "In Class"));
-        getroom.add(new getRoom("Computer Laboratory 2", "In Class"));
-        getroom.add(new getRoom("CPE Laboratory", "In Class"));
-        getroom.add(new getRoom("Audio Visual Room", "Available"));
-        getroom.add(new getRoom("Drawing Room", "In Class"));
-        getroom.add(new getRoom("Room 205A", "Available"));
-        getroom.add(new getRoom("Food Laboratory", "Available"));
-        getroom.add(new getRoom("NB2A", "In Class"));
-        getroom.add(new getRoom("NB2B", "Available"));
-        getroom.add(new getRoom("Campus Library", "Available"));
+    private void fetchRooms() {
+        mainLayout.removeAllViews();
+        LayoutInflater inflater = LayoutInflater.from(this);
 
-        for (getRoom room : getroom) {
-            Log.d("RoomAvailable", "Room: " + room.getRoom() + ", Availability: " + room.getAvailablity());
-        }
+        roomRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful() && task.getResult() != null) {
+                for (DataSnapshot snapshot : task.getResult().getChildren()) {
+                    getRoom room = snapshot.getValue(getRoom.class);
+                    if (room == null) continue;
+
+                    View roomView = inflater.inflate(R.layout.room_item, mainLayout, false);
+
+                    TextView tvRoom = roomView.findViewById(R.id.roomNumber);
+                    TextView tvAvailability = roomView.findViewById(R.id.availablility);
+                    Switch switchStatus = roomView.findViewById(R.id.statusSwitch);
+
+                    tvRoom.setText(room.getRoom());
+                    tvAvailability.setText(room.getAvailability());
+
+                    if (isAdmin) {
+                        switchStatus.setVisibility(View.VISIBLE);
+                        switchStatus.setChecked(room.getAvailability().equals("Available"));
+
+                        switchStatus.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                            String newStatus = isChecked ? "Available" : "In Class";
+                            tvAvailability.setText(newStatus);
+                            roomRef.child(room.getRoom()).child("availability").setValue(newStatus)
+                                    .addOnSuccessListener(unused -> Toast.makeText(this, "Updated!", Toast.LENGTH_SHORT).show())
+                                    .addOnFailureListener(e -> Toast.makeText(this, "Failed to update", Toast.LENGTH_SHORT).show());
+                        });
+                    } else {
+                        switchStatus.setVisibility(View.GONE); // hide switch for non-admin
+                    }
+
+                    mainLayout.addView(roomView);
+                }
+            } else {
+                Toast.makeText(this, "Failed to load rooms", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
