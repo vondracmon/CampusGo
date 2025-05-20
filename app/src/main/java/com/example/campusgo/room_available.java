@@ -1,6 +1,7 @@
 package com.example.campusgo;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -82,6 +83,11 @@ public class room_available extends AppCompatActivity {
                             String newStatus = isChecked ? "Available" : "In Class";
                             tvAvailability.setText(newStatus);
 
+                            if (room.getRoom() == null || room.getRoom().isEmpty()) {
+                                Log.e("Firebase", "Room name is null or empty — skipping update");
+                                return;
+                            }
+
                             // Update room availability
                             roomRef.child(room.getRoom()).child("availability").setValue(newStatus)
                                     .addOnSuccessListener(unused -> Toast.makeText(this, "Updated!", Toast.LENGTH_SHORT).show())
@@ -89,9 +95,13 @@ public class room_available extends AppCompatActivity {
 
                             // Track admin who set room to "In Class"
                             if (!isChecked && username != null) {
-                                roomRef.child(room.getRoom()).child("markedBy").setValue(username);
+                                roomRef.child(room.getRoom()).child("markedBy").setValue(username)
+                                        .addOnSuccessListener(unused -> Log.d("Firebase", "MarkedBy updated"))
+                                        .addOnFailureListener(e -> Log.e("Firebase", "Failed to update markedBy", e));
                             } else if (isChecked) {
-                                roomRef.child(room.getRoom()).child("markedBy").removeValue();
+                                roomRef.child(room.getRoom()).child("markedBy").removeValue()
+                                        .addOnSuccessListener(unused -> Log.d("Firebase", "MarkedBy removed"))
+                                        .addOnFailureListener(e -> Log.e("Firebase", "Failed to remove markedBy", e));
                             }
                         });
                     } else {

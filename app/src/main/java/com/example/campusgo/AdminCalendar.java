@@ -66,7 +66,8 @@ public class AdminCalendar extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        // Set today’s date and load
+        if (textMonthYear == null || eventTitle == null || calendarView == null) return;
+
         Calendar calendar = Calendar.getInstance();
         long todayMillis = calendar.getTimeInMillis();
         String todayFormatted = formatDate(todayMillis);
