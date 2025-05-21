@@ -56,6 +56,8 @@
             android:exported="true" />
         <activity android:name=".ImageViewerActivity" />
         <activity android:name=".second_floor_map" />
+
+        <activity android:name=".AdminCalendar" />
     </application>
 
 </manifest>
