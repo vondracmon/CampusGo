@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/facultyLoginLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_3"
+    tools:context=".FacultyLogin">
+
+    <ImageView
+        android:id="@+id/CGLogoFaculty"
+        android:layout_width="329dp"
+        android:layout_height="279dp"
+        android:layout_marginTop="52dp"
+        android:elevation="8dp"
+        android:contentDescription="CampusGo Faculty Login Logo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/campusgo_logo_1" />
+
+    <EditText
+        android:id="@+id/facultyEmail"
+        android:layout_width="296dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="48dp"
+        android:hint="Faculty Email"
+        android:background="@drawable/custom_edittext"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:textColorHint="#d14679"
+        android:textColor="#000000"
+        android:fontFamily="sans-serif"
+        android:imeOptions="actionNext"
+        android:inputType="textEmailAddress"
+        android:singleLine="true"
+        app:layout_constraintTop_toBottomOf="@id/CGLogoFaculty"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/facultyPassword"
+        android:layout_width="296dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="12dp"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:background="@drawable/custom_edittext"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:textColorHint="#d14679"
+        android:textColor="#000000"
+        android:fontFamily="sans-serif"
+        android:imeOptions="actionDone"
+        android:singleLine="true"
+        app:layout_constraintTop_toBottomOf="@id/facultyEmail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/facultyForgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Forgot Password?"
+        android:textColor="#c90060"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif-light"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@id/facultyPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+
+    <CheckBox
+        android:id="@+id/facultyCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remember me"
+        android:textColor="#c90060"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif-light"
+        app:layout_constraintTop_toBottomOf="@id/facultyForgotPassword"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2" />
+
+    <Button
+        android:id="@+id/facultyLoginBtn"
+        android:layout_width="231dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/custom_button"
+        android:fontFamily="sans-serif-medium"
+        android:text="Login"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:contentDescription="Login Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/facultyCheckBox" />
+
+    <TextView
+        android:id="@+id/facultyLoginStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="#c90060"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/facultyLoginBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="4dp" />
+
+    <Button
+        android:id="@+id/facultyGoogleLoginBtn"
+        android:layout_width="231dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/custom_button"
+        android:fontFamily="sans-serif-medium"
+        android:text="Login using Google"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:contentDescription="Google Login Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/facultyLoginStatus" />
+
+    <ProgressBar
+        android:id="@+id/facultyLoginProgress"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/facultyGoogleLoginBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

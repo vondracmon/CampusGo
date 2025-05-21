@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialogLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@drawable/dialog_background">
+
+    <TextView
+        android:id="@+id/dialogTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login As"
+        android:textSize="20sp"
+        android:textColor="#c90060"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20dp" />
+
+    <Button
+        android:id="@+id/studentBtn"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="Student"
+        android:textColor="#ffffff"
+        android:backgroundTint="#c90060"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/facultyBtn"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="Faculty"
+        android:textColor="#ffffff"
+        android:backgroundTint="#c90060"
+        android:textStyle="bold" />
+</LinearLayout>
