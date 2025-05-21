@@ -11,6 +11,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp" />
+        android:padding="16dp" >
+
+        <TextView
+            android:id="@+id/PageTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Attendance For Today"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+    </LinearLayout>
 
 </ScrollView>

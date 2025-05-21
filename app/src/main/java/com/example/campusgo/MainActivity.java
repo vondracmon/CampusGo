@@ -13,7 +13,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
-    Button signUpBtn, loginBtn, temp;
+    Button signUpBtn, loginBtn, temp, temp2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         signUpBtn = findViewById(R.id.signUpBtn);
         loginBtn = findViewById(R.id.loginBtn);
         temp = findViewById(R.id.temp);
+        temp2 = findViewById(R.id.temp2);
 
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +50,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, qr_scanner.class);
+                startActivity(intent);
+            }
+        });
+        temp2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, faculty_attendance_scan.class);
                 startActivity(intent);
             }
         });
