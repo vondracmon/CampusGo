@@ -29,9 +29,6 @@
             android:exported="false"
             android:theme="@style/Theme.CampusGo" />
         <activity
-            android:name=".admin_room_availability"
-            android:exported="false" />
-        <activity
             android:name=".AdminView"
             android:exported="false" />
         <activity
@@ -42,14 +39,23 @@
             android:name=".qr"
             android:exported="false" />
         <activity
+            android:name=".FacultyLogin"
+            android:exported="true"/>
+        <activity
+            android:name=".FacultyDashboard"
+            android:exported="true"/>
+        <activity
+            android:name=".FacultySchedule"
+            android:exported="true"/>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".register_activity"
             android:exported="true" />

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/facultyScheduleLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_3"
+    android:padding="16dp"
+    tools:context=".FacultySchedule">
+
+    <TextView
+        android:id="@+id/facultyWelcomeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="👋 Welcome, Faculty"
+        android:textColor="#fff"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginTop="24dp"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:id="@+id/facultyIcon"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_below="@id/facultyWelcomeText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:contentDescription="Faculty Icon" />
+
+    <TextView
+        android:id="@+id/scheduleLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="📅 Your Class Schedule"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:layout_below="@id/facultyIcon"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="8dp"
+        android:layout_centerHorizontal="true" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/scheduleLabel"
+        android:layout_above="@+id/backButton"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/scheduleContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp" />
+    </ScrollView>
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="240dp"
+        android:layout_height="56dp"
+        android:text="Back to Main"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="#c90060"
+        android:textStyle="bold" />
+</RelativeLayout>
