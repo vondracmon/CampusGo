@@ -2,9 +2,11 @@ package com.example.campusgo;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,12 +31,26 @@ import com.google.mlkit.vision.common.InputImage;
 import java.util.List;
 import java.util.concurrent.Executor;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+
 public class qr_scanner extends AppCompatActivity {
 
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 1001;
     private PreviewView previewView;
     private TextView qrTextView;
     private Executor executor;
+
+    private boolean isScanHandled = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,7 +132,35 @@ public class qr_scanner extends AppCompatActivity {
                     .addOnSuccessListener(barcodes -> {
                         for (Barcode barcode : barcodes) {
                             final String rawValue = barcode.getRawValue();
+
                             runOnUiThread(() -> qrTextView.setText("QR Code: " + rawValue));
+
+                            try {
+                                JSONObject qrData = new JSONObject(rawValue);
+                                String username = qrData.optString("username");
+                                String studNumber = qrData.optString("stud_number");
+
+                                // Store to Firebase
+                                saveToFirebase(username, studNumber);
+                                if (!isScanHandled) {
+                                    isScanHandled = true;
+                                    imageProxy.close();
+
+                                    Intent intent = new Intent(qr_scanner.this, faculty_attendance_scan.class);
+                                    intent.putExtra("username", username);
+                                    intent.putExtra("stud_number", studNumber);
+                                    startActivity(intent);
+                                    finish();
+                                }
+
+
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                runOnUiThread(() ->
+                                        Toast.makeText(this, "Invalid QR format", Toast.LENGTH_SHORT).show()
+                                );
+                            }
                         }
                     })
                     .addOnFailureListener(e -> Log.e("qr_scanner", "QR scan failed", e))
@@ -125,4 +169,46 @@ public class qr_scanner extends AppCompatActivity {
             imageProxy.close();
         }
     }
+    private void saveToFirebase(String username, String studNumber) {
+        // Format: yyyy-MM-dd
+        String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+
+        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("attendance").child(currentDate);
+
+        // Generate a unique key (push ID)
+        String entryId = databaseRef.push().getKey();
+
+        if (entryId != null) {
+            HashMap<String, Object> data = new HashMap<>();
+            data.put("username", username);
+            data.put("stud_number", studNumber);
+            data.put("timestamp", System.currentTimeMillis());
+
+            databaseRef.child(entryId).setValue(data)
+                    .addOnSuccessListener(unused ->
+                            Toast.makeText(this, "Data saved to Firebase", Toast.LENGTH_SHORT).show())
+                    .addOnFailureListener(e ->
+                            Toast.makeText(this, "Failed to save data", Toast.LENGTH_SHORT).show());
+        }
+    }
+
+    private void showQRDialog(String username, String studNumber) {
+        @SuppressLint("InflateParams")
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_qr_data, null);
+
+        TextView tvUsername = dialogView.findViewById(R.id.tvUsername);
+        TextView tvStudNumber = dialogView.findViewById(R.id.tvStudNumber);
+
+        tvUsername.setText("Username: " + username);
+        tvStudNumber.setText("Student Number: " + studNumber);
+
+        new android.app.AlertDialog.Builder(this)
+                .setTitle("Scanned Data")
+                .setView(dialogView)
+                .setPositiveButton("OK", null)
+                .show();
+    }
+
+
+
 }

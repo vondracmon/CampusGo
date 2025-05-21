@@ -103,9 +103,11 @@ public class qr extends AppCompatActivity {
                             profileImage.setImageResource(R.drawable.human_icon);
                         }
 
-                        String qrData = "Name: " + (name != null ? name : "N/A") +
-                                "\nStudent Number: " + (studentNumber != null ? studentNumber : "N/A") +
-                                "\nEmail: " + (email != null ? email : "N/A");
+                        String qrData = "{"
+                                + "\"username\":\"" + (name != null ? name : "N/A") + "\","
+                                + "\"student_number\":\"" + (studentNumber != null ? studentNumber : "N/A") + "\""
+                                + "}";
+
                         generateQRCode(qrData);
 
                     } else {
