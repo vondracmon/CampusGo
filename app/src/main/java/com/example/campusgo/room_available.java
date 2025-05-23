@@ -10,6 +10,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,6 +23,7 @@ public class room_available extends AppCompatActivity {
     private LinearLayout mainLayout;
     private DatabaseReference roomRef;
     private FirebaseUser currentUser;
+    private ValueEventListener roomsListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,7 @@ public class room_available extends AppCompatActivity {
                 String username = dataSnapshot.getValue(String.class);
                 fetchRooms(username);
             }).addOnFailureListener(e -> {
-                Toast.makeText(this, "Failed to fetch username", Toast.LENGTH_SHORT).show();
+                Toast.makeText(room_available.this, "Failed to fetch username", Toast.LENGTH_SHORT).show();
                 fetchRooms("Unknown");
             });
         } else {
@@ -55,13 +57,20 @@ public class room_available extends AppCompatActivity {
     }
 
     private void fetchRooms(String username) {
-        mainLayout.removeAllViews();
         LayoutInflater inflater = LayoutInflater.from(this);
 
-        roomRef.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful() && task.getResult() != null) {
-                for (DataSnapshot snapshot : task.getResult().getChildren()) {
-                    getRoom rooms = snapshot.getValue(getRoom.class);
+        // Remove previous listener if exists to avoid duplicates
+        if (roomsListener != null) {
+            roomRef.removeEventListener(roomsListener);
+        }
+
+        roomsListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                mainLayout.removeAllViews(); // Clear views before adding updated list
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    getRoom rooms = dataSnapshot.getValue(getRoom.class);
                     if (rooms == null) continue;
 
                     View roomView = inflater.inflate(R.layout.room_item, mainLayout, false);
@@ -76,9 +85,10 @@ public class room_available extends AppCompatActivity {
 
                     if (isAdmin) {
                         switchStatus.setVisibility(View.VISIBLE);
-                        switchStatus.setChecked(rooms.getAvailability().equals("Available"));
-                        tvMarkedBy.setVisibility(View.GONE);
 
+                        // Prevent listener triggers when setting checked programmatically
+                        switchStatus.setOnCheckedChangeListener(null);
+                        switchStatus.setChecked(rooms.getAvailability().equals("Available"));
                         switchStatus.setOnCheckedChangeListener((buttonView, isChecked) -> {
                             String newStatus = isChecked ? "Available" : "In Class";
                             tvAvailability.setText(newStatus);
@@ -88,12 +98,12 @@ public class room_available extends AppCompatActivity {
                                 return;
                             }
 
-                            // Update room availability
+                            // Update room availability in Firebase
                             roomRef.child(rooms.getRoom()).child("availability").setValue(newStatus)
-                                    .addOnSuccessListener(unused -> Toast.makeText(this, "Updated!", Toast.LENGTH_SHORT).show())
-                                    .addOnFailureListener(e -> Toast.makeText(this, "Failed to update", Toast.LENGTH_SHORT).show());
+                                    .addOnSuccessListener(unused -> Toast.makeText(room_available.this, "Updated!", Toast.LENGTH_SHORT).show())
+                                    .addOnFailureListener(e -> Toast.makeText(room_available.this, "Failed to update", Toast.LENGTH_SHORT).show());
 
-                            // Track admin who set room to "In Class"
+                            // Track admin who marked the room busy
                             if (!isChecked && username != null) {
                                 roomRef.child(rooms.getRoom()).child("markedBy").setValue(username)
                                         .addOnSuccessListener(unused -> Log.d("Firebase", "MarkedBy updated"))
@@ -104,10 +114,12 @@ public class room_available extends AppCompatActivity {
                                         .addOnFailureListener(e -> Log.e("Firebase", "Failed to remove markedBy", e));
                             }
                         });
+
+                        tvMarkedBy.setVisibility(View.GONE);
                     } else {
                         switchStatus.setVisibility(View.GONE);
 
-                        // Show 'markedBy' if the room is not available
+                        // Show who marked the room if not available
                         if (!rooms.getAvailability().equals("Available") && rooms.getMarkedBy() != null) {
                             tvMarkedBy.setText("Marked by: " + rooms.getMarkedBy());
                             tvMarkedBy.setVisibility(View.VISIBLE);
@@ -118,10 +130,25 @@ public class room_available extends AppCompatActivity {
 
                     mainLayout.addView(roomView);
                 }
-            } else {
-                Log.e("ROOM_FETCH", "Task failed: " + task.getException());
-                Toast.makeText(this, "Failed to load rooms", Toast.LENGTH_SHORT).show();
             }
-        });
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("ROOM_FETCH", "Failed to read rooms: ", error.toException());
+                Toast.makeText(room_available.this, "Failed to load rooms", Toast.LENGTH_SHORT).show();
+            }
+        };
+
+        // Attach the real-time listener
+        roomRef.addValueEventListener(roomsListener);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Remove listener to avoid memory leaks
+        if (roomsListener != null) {
+            roomRef.removeEventListener(roomsListener);
+        }
     }
 }
