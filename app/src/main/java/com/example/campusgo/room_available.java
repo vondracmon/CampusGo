@@ -119,6 +119,7 @@ public class room_available extends AppCompatActivity {
                     mainLayout.addView(roomView);
                 }
             } else {
+                Log.e("ROOM_FETCH", "Task failed: " + task.getException());
                 Toast.makeText(this, "Failed to load rooms", Toast.LENGTH_SHORT).show();
             }
         });

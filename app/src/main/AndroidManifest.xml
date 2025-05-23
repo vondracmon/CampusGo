@@ -19,6 +19,9 @@
         android:theme="@style/Theme.CampusGo"
         tools:targetApi="31">
         <activity
+            android:name=".FacultyRoomAvailable"
+            android:exported="false" />
+        <activity
             android:name=".faculty_attendance_scan"
             android:exported="false" />
         <activity
@@ -43,22 +46,22 @@
             android:exported="false" />
         <activity
             android:name=".FacultyLogin"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".FacultyDashboard"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".FacultySchedule"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".register_activity"
             android:exported="true" />
