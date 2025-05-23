@@ -82,5 +82,11 @@ public class FacultyDashboard extends AppCompatActivity {
             startActivity(new Intent(this, FacultyLogin.class));
             finish();
         });
+        btnEditRoom.setOnClickListener(v -> {
+            startActivity(new Intent(this, FacultyRoomAvailable.class));
+        });
+        btnEditCalendar.setOnClickListener(v -> {
+            startActivity(new Intent(this, AdminCalendar.class));
+        });
     }
 }

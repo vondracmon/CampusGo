@@ -5,7 +5,8 @@ public class getRoom {
     private String availability;
     private String markedBy;
 
-    public getRoom() {} // Needed for Firebase
+    public getRoom() {
+    }
 
     public getRoom(String room, String availability, String markedBy) {
         this.room = room;
@@ -13,27 +14,27 @@ public class getRoom {
         this.markedBy = markedBy;
     }
 
-    public String getMarkedBy() {
-        return markedBy;
-    }
-
     public String getRoom() {
         return room;
-    }
-
-    public String getAvailability() {
-        return availability;
-    }
-
-    public void setMarkedBy(String markedBy) {
-        this.markedBy = markedBy;
     }
 
     public void setRoom(String room) {
         this.room = room;
     }
 
+    public String getAvailability() {
+        return availability;
+    }
+
     public void setAvailability(String availability) {
         this.availability = availability;
+    }
+
+    public String getMarkedBy() {
+        return markedBy;
+    }
+
+    public void setMarkedBy(String markedBy) {
+        this.markedBy = markedBy;
     }
 }
