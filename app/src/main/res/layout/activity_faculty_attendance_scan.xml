@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
@@ -11,16 +12,43 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp" >
+        android:padding="1dp" >
 
-        <TextView
-            android:id="@+id/PageTitle"
+        <LinearLayout
+            android:id="@+id/containerLayout2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Attendance For Today"
-            android:textAlignment="center"
-            android:textSize="20dp"
-            android:textStyle="bold"/>
+            android:layout_height="89dp"
+            android:orientation="vertical"
+            android:padding="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="89dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="2dp">
+
+                <TextView
+                    android:id="@+id/PageTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="12dp"
+                    android:text="Attendance For Today"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/qr_scanner"
+                    android:layout_width="74dp"
+                    android:layout_height="71dp"
+                    android:layout_marginLeft="90dp"
+                    android:background="@drawable/rounded_border"
+                    android:padding="0dp"
+                    app:srcCompat="@drawable/qr_icon" />
+            </LinearLayout>
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </ScrollView>

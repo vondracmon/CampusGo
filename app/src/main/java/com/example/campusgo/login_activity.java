@@ -35,6 +35,8 @@ public class login_activity extends AppCompatActivity {
     GoogleSignInClient gsc;
     FirebaseAuth auth;
 
+    String AdminUserN = "Admin", AdminPass = "Admin";
+
     private final String CHANNEL_ID = "My_notification"; // notification channel ID
 
     @Override
@@ -69,7 +71,7 @@ public class login_activity extends AppCompatActivity {
                 IdOrEmail.setError("Email cannot be empty");
             } else if (password.isEmpty()) {
                 pass.setError("Password cannot be empty");
-            } else if (email.equals("Admin") || password.equals("Admin")) {
+            } else if (email.equals(AdminUserN) || password.equals(AdminPass)) {
                 Toast.makeText(login_activity.this, "Logged in Successfully!", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(login_activity.this, AdminView.class));
                 finish();
@@ -81,17 +83,38 @@ public class login_activity extends AppCompatActivity {
                                 DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
                                 userRef.child("role").get().addOnCompleteListener(task -> {
                                     if (task.isSuccessful()) {
-                                        if (task.getResult().getValue(String.class) == null) {
+                                        String role = task.getResult().getValue(String.class);
+                                        if (role == null) {
                                             userRef.child("role").setValue("user");
+                                            role = "user";
                                         }
-                                        Toast.makeText(login_activity.this, "Logged in Successfully!", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(login_activity.this, home_activity.class));
-                                        finish();
+
+                                        if ("admin".equalsIgnoreCase(role)) {
+                                            Toast.makeText(login_activity.this, "Admin Login Successful!", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(login_activity.this, AdminView.class);
+                                            intent.putExtra("isAdmin", true);
+                                            startActivity(intent);
+                                            finish();
+                                        } else {
+                                            Toast.makeText(login_activity.this, "User Login Successful!", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(login_activity.this, home_activity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
                                     } else {
                                         Toast.makeText(login_activity.this, "Error checking role: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 });
                             }
+//                            else if ("Admin".equals(AdminUserN) && "Admin".equals(AdminPass)) {
+//                                // Hardcoded admin bypass login
+//                                Toast.makeText(login_activity.this, "Admin Login Successful!", Toast.LENGTH_SHORT).show();
+//
+//                                Intent intent = new Intent(login_activity.this, home_activity.class);
+//                                intent.putExtra("isAdmin", true); // <-- Pass admin status to other activities
+//                                startActivity(intent);
+//                                finish();
+//                            }
                         })
                         .addOnFailureListener(e -> {
                             Toast.makeText(login_activity.this, "Login Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();

@@ -76,10 +76,16 @@ public class FacultyDashboard extends AppCompatActivity {
         btnSchedule.setOnClickListener(v -> {
             startActivity(new Intent(this, FacultySchedule.class));
         });
+        btnViewAttendance.setOnClickListener(v -> {
+            Intent intent = new Intent(FacultyDashboard.this, faculty_attendance_scan.class);
+            startActivity(intent);
+        });
 
         logoutButton.setOnClickListener(v -> {
             auth.signOut();
-            startActivity(new Intent(this, FacultyLogin.class));
+            Intent intent = new Intent(FacultyDashboard.this, FacultyLogin.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
             finish();
         });
         btnEditRoom.setOnClickListener(v -> {

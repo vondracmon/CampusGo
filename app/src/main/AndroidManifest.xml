@@ -74,6 +74,7 @@
         <activity android:name=".ImageViewerActivity" />
         <activity android:name=".second_floor_map" />
         <activity android:name=".AdminCalendar" />
+        <activity android:name=".Settings" />
     </application>
 
 </manifest>
