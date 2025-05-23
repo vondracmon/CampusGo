@@ -61,8 +61,8 @@ public class room_available extends AppCompatActivity {
         roomRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful() && task.getResult() != null) {
                 for (DataSnapshot snapshot : task.getResult().getChildren()) {
-                    getRoom room = snapshot.getValue(getRoom.class);
-                    if (room == null) continue;
+                    getRoom rooms = snapshot.getValue(getRoom.class);
+                    if (rooms == null) continue;
 
                     View roomView = inflater.inflate(R.layout.room_item, mainLayout, false);
 
@@ -71,35 +71,35 @@ public class room_available extends AppCompatActivity {
                     TextView tvMarkedBy = roomView.findViewById(R.id.markedByText);
                     Switch switchStatus = roomView.findViewById(R.id.statusSwitch);
 
-                    tvRoom.setText(room.getRoom());
-                    tvAvailability.setText(room.getAvailability());
+                    tvRoom.setText(rooms.getRoom());
+                    tvAvailability.setText(rooms.getAvailability());
 
                     if (isAdmin) {
                         switchStatus.setVisibility(View.VISIBLE);
-                        switchStatus.setChecked(room.getAvailability().equals("Available"));
+                        switchStatus.setChecked(rooms.getAvailability().equals("Available"));
                         tvMarkedBy.setVisibility(View.GONE);
 
                         switchStatus.setOnCheckedChangeListener((buttonView, isChecked) -> {
                             String newStatus = isChecked ? "Available" : "In Class";
                             tvAvailability.setText(newStatus);
 
-                            if (room.getRoom() == null || room.getRoom().isEmpty()) {
+                            if (rooms.getRoom() == null || rooms.getRoom().isEmpty()) {
                                 Log.e("Firebase", "Room name is null or empty — skipping update");
                                 return;
                             }
 
                             // Update room availability
-                            roomRef.child(room.getRoom()).child("availability").setValue(newStatus)
+                            roomRef.child(rooms.getRoom()).child("availability").setValue(newStatus)
                                     .addOnSuccessListener(unused -> Toast.makeText(this, "Updated!", Toast.LENGTH_SHORT).show())
                                     .addOnFailureListener(e -> Toast.makeText(this, "Failed to update", Toast.LENGTH_SHORT).show());
 
                             // Track admin who set room to "In Class"
                             if (!isChecked && username != null) {
-                                roomRef.child(room.getRoom()).child("markedBy").setValue(username)
+                                roomRef.child(rooms.getRoom()).child("markedBy").setValue(username)
                                         .addOnSuccessListener(unused -> Log.d("Firebase", "MarkedBy updated"))
                                         .addOnFailureListener(e -> Log.e("Firebase", "Failed to update markedBy", e));
                             } else if (isChecked) {
-                                roomRef.child(room.getRoom()).child("markedBy").removeValue()
+                                roomRef.child(rooms.getRoom()).child("markedBy").removeValue()
                                         .addOnSuccessListener(unused -> Log.d("Firebase", "MarkedBy removed"))
                                         .addOnFailureListener(e -> Log.e("Firebase", "Failed to remove markedBy", e));
                             }
@@ -108,8 +108,8 @@ public class room_available extends AppCompatActivity {
                         switchStatus.setVisibility(View.GONE);
 
                         // Show 'markedBy' if the room is not available
-                        if (!room.getAvailability().equals("Available") && room.getMarkedBy() != null) {
-                            tvMarkedBy.setText("Marked by: " + room.getMarkedBy());
+                        if (!rooms.getAvailability().equals("Available") && rooms.getMarkedBy() != null) {
+                            tvMarkedBy.setText("Marked by: " + rooms.getMarkedBy());
                             tvMarkedBy.setVisibility(View.VISIBLE);
                         } else {
                             tvMarkedBy.setVisibility(View.GONE);

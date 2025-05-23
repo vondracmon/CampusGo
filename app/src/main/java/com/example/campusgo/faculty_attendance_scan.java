@@ -1,15 +1,17 @@
 package com.example.campusgo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -22,12 +24,10 @@ import java.util.Locale;
 
 import android.util.Log;
 
-
 public class faculty_attendance_scan extends AppCompatActivity {
 
     private LinearLayout containerLayout;
-
-
+    ImageView scanButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,18 +35,20 @@ public class faculty_attendance_scan extends AppCompatActivity {
         setContentView(R.layout.activity_faculty_attendance_scan);
 
         containerLayout = findViewById(R.id.containerLayout);
+        scanButton = findViewById(R.id.qr_scanner);
 
         // Get today's date as node
         String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
-        // Reference to the "Attendance/yyyy-MM-dd" node
+        // Reference to the "attendance/yyyy-MM-dd" node
         DatabaseReference attendanceRef = FirebaseDatabase.getInstance()
                 .getReference("attendance").child(currentDate);
 
-        // Listen to changes
+        // Log for debugging
         Log.d("DEBUG_DATE", "Querying date node: " + currentDate);
 
-        attendanceRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        // Listen for today's attendance
+        attendanceRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 Log.d("DEBUG_DATE", "Snapshot exists: " + snapshot.exists());
@@ -59,9 +61,6 @@ public class faculty_attendance_scan extends AppCompatActivity {
 
                 for (DataSnapshot child : snapshot.getChildren()) {
                     Log.d("DEBUG_DATE", "Child key: " + child.getKey());
-                    for (DataSnapshot grandChild : child.getChildren()) {
-                        Log.d("DEBUG_DATE", "  " + grandChild.getKey() + ": " + grandChild.getValue());
-                    }
 
                     String username = child.child("username").getValue(String.class);
                     String studNum = child.child("stud_number").getValue(String.class);
@@ -72,15 +71,18 @@ public class faculty_attendance_scan extends AppCompatActivity {
                 }
             }
 
-
-
-
             @Override
             public void onCancelled(DatabaseError error) {
-                // Handle error
+                Log.e("FIREBASE_ERROR", "Database error: " + error.getMessage());
+                Toast.makeText(faculty_attendance_scan.this, "Failed to load data.", Toast.LENGTH_SHORT).show();
             }
         });
+
+        scanButton.setOnClickListener(v -> {
+            startActivity(new Intent(this, qr_scanner.class));
+        });
     }
+
 
     private void addEntryToLayout(String username, String studNumber) {
         LayoutInflater inflater = LayoutInflater.from(this);

@@ -52,6 +52,7 @@ public class qr_scanner extends AppCompatActivity {
     private TextView qrTextView;
     private Executor executor;
 
+
     private boolean isScanHandled = false;
 
 
@@ -122,7 +123,6 @@ public class qr_scanner extends AppCompatActivity {
         }, executor);
     }
 
-
     @SuppressLint("UnsafeOptInUsageError")
     private void scanQRCode(ImageProxy imageProxy) {
         if (isScanHandled) {
@@ -148,29 +148,27 @@ public class qr_scanner extends AppCompatActivity {
                                 String username = qrData.optString("username");
                                 String studentNumber = qrData.optString("student_number");
 
-                                // Lock the scan
+                                // Lock scanning to prevent multiple triggers
                                 isScanHandled = true;
-
-                                // Save and go to next activity
                                 saveToFirebase(username, studentNumber);
-                                Intent intent = new Intent(qr_scanner.this, faculty_attendance_scan.class);
-                                intent.putExtra("username", username);
-                                intent.putExtra("stud_number", studentNumber);
-                                startActivity(intent);
-                                finish();
+                                // Delay 3 seconds, then allow scanning again
+                                new android.os.Handler().postDelayed(() -> {
+                                    isScanHandled = false;
+                                }, 3000);
 
-                                break; // Exit the loop after handling one QR
+                                break;
                             } catch (JSONException e) {
                                 runOnUiThread(() -> Toast.makeText(this, "Invalid QR format", Toast.LENGTH_SHORT).show());
                             }
                         }
                     })
                     .addOnFailureListener(e -> Log.e("qr_scanner", "QR scan failed", e))
-                    .addOnCompleteListener(task -> imageProxy.close()); // Always close the imageProxy
+                    .addOnCompleteListener(task -> imageProxy.close());
         } else {
             imageProxy.close();
         }
     }
+
 
     private void saveToFirebase(String username, String studNumber) {
         // Format: yyyy-MM-dd
