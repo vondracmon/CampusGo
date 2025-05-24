@@ -22,8 +22,8 @@ import java.util.List;
 
 public class AdminView extends AppCompatActivity {
 
-    EditText emailInput, passwordInput;
-    Button registerBtn, loginBtn, updateEmailBtn, deleteUserBtn, logoutBtn;
+    EditText emailInput, stud_email_change, passwordInput, usernameInput;
+    Button registerBtn, updateEmailBtn, deleteUserBtn, logoutBtn;
     RecyclerView userRecyclerView;
 
     DrawerLayout drawerLayout;
@@ -38,6 +38,26 @@ public class AdminView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_view);
+
+        //admin checker
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid()).child("role");
+            ref.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    String role = task.getResult().getValue(String.class);
+                    if (!"admin".equalsIgnoreCase(role)) {
+                        Toast.makeText(AdminView.this, "Access denied", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(AdminView.this, home_activity.class));
+                        finish();
+                    }
+                } else {
+                    Toast.makeText(AdminView.this, "Could not verify role", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            });
+        }
+
 
         // Setup UI components
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -55,11 +75,11 @@ public class AdminView extends AppCompatActivity {
         emailInput = findViewById(R.id.emailInput);
         passwordInput = findViewById(R.id.passwordInput);
         registerBtn = findViewById(R.id.registerBtn);
-        loginBtn = findViewById(R.id.loginBtn);
         updateEmailBtn = findViewById(R.id.updateEmailBtn);
         deleteUserBtn = findViewById(R.id.deleteUserBtn);
-        logoutBtn = findViewById(R.id.logoutBtn);
         userRecyclerView = findViewById(R.id.userRecyclerView);
+        stud_email_change = findViewById(R.id.stud_email_change);
+        usernameInput = findViewById(R.id.usernameInput);
 
         // Firebase
         auth = FirebaseAuth.getInstance();
@@ -76,10 +96,8 @@ public class AdminView extends AppCompatActivity {
 
         // Button listeners
         registerBtn.setOnClickListener(v -> registerUser());
-        loginBtn.setOnClickListener(v -> loginUser());
         updateEmailBtn.setOnClickListener(v -> updateEmail());
         deleteUserBtn.setOnClickListener(v -> deleteUser());
-        logoutBtn.setOnClickListener(v -> logoutUser());
 
         // Navigation drawer logic
         navView.setNavigationItemSelectedListener(item -> {
@@ -106,45 +124,38 @@ public class AdminView extends AppCompatActivity {
     private void registerUser() {
         String email = emailInput.getText().toString().trim();
         String password = passwordInput.getText().toString().trim();
+        String facultyUsername = usernameInput.getText().toString().trim();
 
-        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+        String role = "faculty";
+
+        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(facultyUsername)) {
             Toast.makeText(this, "Do not leave anything blank", Toast.LENGTH_SHORT).show();
+            emailInput.setError("Enter email");
+            passwordInput.setError("Enter password");
+            usernameInput.setError("Enter username");
             return;
         }
 
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnSuccessListener(authResult -> {
                     String userId = auth.getCurrentUser().getUid();
-                    Users user = new Users(email);
+
+                    Users user = new Users(facultyUsername, email, role);
+
                     databaseReference.child(userId).setValue(user)
                             .addOnSuccessListener(unused -> {
                                 fetchUsers();
-                                showAlert("Registration Successful", "Email: " + email + "\nPassword: " + password);
+                                showAlert("Registration Successful", "Email: " + email + "\nUsername: " + facultyUsername + "\nPassword: " + password);
+
                             })
                             .addOnFailureListener(e -> Toast.makeText(this, "Database Error: " + e.getMessage(), Toast.LENGTH_SHORT).show());
                 })
                 .addOnFailureListener(e -> Toast.makeText(this, "Registration Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+        emailInput.setText("");
+        passwordInput.setText("");
+        usernameInput.setText("");
     }
 
-    private void loginUser() {
-        String email = emailInput.getText().toString().trim();
-        String password = passwordInput.getText().toString().trim();
-
-        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "Fill all fields", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        auth.signInWithEmailAndPassword(email, password)
-                .addOnSuccessListener(authResult -> {
-                    Toast.makeText(this, "Logged in Successfully!", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(this, room_available.class);
-                    intent.putExtra("isAdmin", true);
-                    startActivity(intent);
-                    finish();
-                })
-                .addOnFailureListener(e -> Toast.makeText(this, "Login Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show());
-    }
 
     private void updateEmail() {
         FirebaseUser user = auth.getCurrentUser();
@@ -153,9 +164,9 @@ public class AdminView extends AppCompatActivity {
             return;
         }
 
-        String newEmail = emailInput.getText().toString().trim();
+        String newEmail = stud_email_change.getText().toString().trim();
         if (TextUtils.isEmpty(newEmail)) {
-            emailInput.setError("Enter new email");
+            stud_email_change.setError("Enter new email");
             return;
         }
 
@@ -166,24 +177,51 @@ public class AdminView extends AppCompatActivity {
                     fetchUsers();
                 })
                 .addOnFailureListener(e -> Toast.makeText(this, "Update failed: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+        stud_email_change.setText("");
     }
 
     private void deleteUser() {
-        FirebaseUser user = auth.getCurrentUser();
-        if (user == null) {
-            Toast.makeText(this, "Please login first.", Toast.LENGTH_SHORT).show();
+        String targetEmail = stud_email_change.getText().toString().trim();
+
+        if (TextUtils.isEmpty(targetEmail)) {
+            Toast.makeText(this, "Please enter an email", Toast.LENGTH_SHORT).show();
+            stud_email_change.setError("Enter an email");
             return;
         }
 
-        String uid = user.getUid();
-        user.delete()
-                .addOnSuccessListener(unused -> {
-                    databaseReference.child(uid).removeValue();
-                    Toast.makeText(this, "Account deleted", Toast.LENGTH_SHORT).show();
-                    fetchUsers();
-                })
-                .addOnFailureListener(e -> Toast.makeText(this, "Delete failed: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                boolean found = false;
+
+                for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                    Users user = userSnapshot.getValue(Users.class);
+
+                    if (user != null && targetEmail.equalsIgnoreCase(user.getEmail())) {
+                        userSnapshot.getRef().removeValue()
+                                .addOnSuccessListener(unused -> {
+                                    Toast.makeText(getApplicationContext(), "User deleted from database", Toast.LENGTH_SHORT).show();
+                                    fetchUsers(); // Refresh UI or list
+                                })
+                                .addOnFailureListener(e -> Toast.makeText(getApplicationContext(), "Delete failed: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found) {
+                    Toast.makeText(getApplicationContext(), "User not found", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(), "Database error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        stud_email_change.setText("");
     }
+
 
     private void logoutUser() {
         auth.signOut();
@@ -195,13 +233,13 @@ public class AdminView extends AppCompatActivity {
     }
 
     private void fetchUsers() {
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 userList.clear();
                 for (DataSnapshot child : snapshot.getChildren()) {
                     Users user = child.getValue(Users.class);
-                    if (user != null) {
+                    if (user != null && user.getEmail() != null && !user.getEmail().trim().isEmpty()) {
                         userList.add(user);
                     }
                 }

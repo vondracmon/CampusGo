@@ -95,12 +95,18 @@ public class login_activity extends AppCompatActivity {
                                             intent.putExtra("isAdmin", true);
                                             startActivity(intent);
                                             finish();
+                                        } else if("faculty".equalsIgnoreCase(role)){
+                                            Toast.makeText(login_activity.this, "Faculty Login Successful!", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(login_activity.this, FacultyDashboard.class);
+                                            startActivity(intent);
+                                            finish();
                                         } else {
                                             Toast.makeText(login_activity.this, "User Login Successful!", Toast.LENGTH_SHORT).show();
                                             Intent intent = new Intent(login_activity.this, home_activity.class);
                                             startActivity(intent);
                                             finish();
                                         }
+
                                     } else {
                                         Toast.makeText(login_activity.this, "Error checking role: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                     }
