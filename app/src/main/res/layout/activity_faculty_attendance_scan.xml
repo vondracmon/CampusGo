@@ -8,47 +8,50 @@
     tools:context=".faculty_attendance_scan">
 
     <LinearLayout
-        android:id="@+id/containerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="1dp" >
+        android:padding="16dp">
 
-        <LinearLayout
-            android:id="@+id/containerLayout2"
+        <!-- Top bar with title and scan button -->
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="89dp"
+            android:layout_height="wrap_content">
+
+            <!-- Title -->
+            <TextView
+                android:id="@+id/PageTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Attendance For Today"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/qr_scanner"
+                app:layout_constraintBottom_toBottomOf="@+id/qr_scanner"
+                android:layout_marginEnd="8dp"/>
+
+            <!-- QR Scanner Button -->
+            <ImageView
+                android:id="@+id/qr_scanner"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@drawable/rounded_border"
+                android:padding="8dp"
+                app:srcCompat="@drawable/qr_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/PageTitle" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Container for dynamic QR data entries -->
+        <LinearLayout
+            android:id="@+id/containerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="2dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="89dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="2dp">
-
-                <TextView
-                    android:id="@+id/PageTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="12dp"
-                    android:text="Attendance For Today"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:id="@+id/qr_scanner"
-                    android:layout_width="74dp"
-                    android:layout_height="71dp"
-                    android:layout_marginLeft="90dp"
-                    android:background="@drawable/rounded_border"
-                    android:padding="0dp"
-                    app:srcCompat="@drawable/qr_icon" />
-            </LinearLayout>
-
-        </LinearLayout>
+            android:layout_marginTop="16dp" />
 
     </LinearLayout>
-
 </ScrollView>

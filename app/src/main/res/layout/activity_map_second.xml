@@ -1,0 +1,200 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Background map -->
+    <ImageView
+        android:id="@+id/floorMap"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/second_floor" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Sample position layout. You can adjust marginTop/Start for real positioning -->
+
+        <!-- Food Laboratory -->
+
+        <Button
+            android:id="@+id/btnFoodLab"
+            android:layout_width="136dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="256dp"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Room 205A -->
+
+        <View
+            android:id="@+id/indicatorFoodLab"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginStart="372dp"
+            android:layout_marginTop="44dp"
+            android:background="@drawable/red_indicator"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnRoom205A"
+            android:layout_width="136dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="256dp"
+            android:layout_marginTop="72dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Drawing Room -->
+
+        <View
+            android:id="@+id/indicatorRoom205A"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginStart="372dp"
+            android:layout_marginTop="92dp"
+            android:background="@drawable/red_indicator"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnDrawingRoom"
+            android:layout_width="136dp"
+            android:layout_height="43dp"
+            android:layout_marginStart="256dp"
+            android:layout_marginTop="128dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- AVR -->
+
+
+        <!-- CPE Laboratory -->
+
+        <View
+            android:id="@+id/indicatorDrawingRoom"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginStart="372dp"
+            android:layout_marginTop="140dp"
+            android:background="@drawable/red_indicator"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnCPELab"
+            android:layout_width="102dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="288dp"
+            android:layout_marginTop="484dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Computer Lab 2 -->
+
+        <View
+            android:id="@+id/indicatorCPELab"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginStart="376dp"
+            android:layout_marginTop="508dp"
+            android:background="@drawable/red_indicator"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnCompLab2"
+            android:layout_width="133dp"
+            android:layout_height="57dp"
+            android:layout_marginStart="256dp"
+            android:layout_marginTop="544dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Computer Lab 1 -->
+
+        <View
+            android:id="@+id/indicatorCompLab2"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginStart="376dp"
+            android:layout_marginTop="572dp"
+            android:background="@drawable/red_indicator"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnCompLab1"
+            android:layout_width="173dp"
+            android:layout_height="66dp"
+            android:layout_marginStart="220dp"
+            android:layout_marginTop="644dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- NB2B -->
+        <View
+            android:id="@+id/indicatorCompLab1"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginStart="376dp"
+            android:layout_marginTop="680dp"
+            android:background="@drawable/red_indicator"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnNB2B"
+            android:layout_width="133dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="324dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- NB2A -->
+
+        <View
+            android:id="@+id/indicatorNB2B"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginStart="132dp"
+            android:layout_marginTop="348dp"
+            android:background="@drawable/red_indicator"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnNB2A"
+            android:layout_width="134dp"
+            android:layout_height="51dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="384dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/indicatorNB2A"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginStart="132dp"
+            android:layout_marginTop="400dp"
+            android:background="@drawable/red_indicator"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

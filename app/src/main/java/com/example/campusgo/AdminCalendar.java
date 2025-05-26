@@ -32,8 +32,10 @@ public class AdminCalendar extends AppCompatActivity {
 
     private final DatabaseReference eventsRef = FirebaseDatabase.getInstance().getReference("events");
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        LocaleHelper.applySavedLocale(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_calendar);
 

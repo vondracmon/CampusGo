@@ -11,6 +11,7 @@ public class floor extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        LocaleHelper.applySavedLocale(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_floor);
 
@@ -19,12 +20,12 @@ public class floor extends AppCompatActivity {
         backButton =  findViewById(R.id.backBtn);
 
         groundFloorButton.setOnClickListener(v -> {
-            Intent intent = new Intent(floor.this, ground_map.class);
+            Intent intent = new Intent(floor.this, map_ground.class);
             startActivity(intent);
         });
 
         secondFloorButton.setOnClickListener(v -> {
-            Intent intent = new Intent(floor.this, second_floor_map.class);
+            Intent intent = new Intent(floor.this, map_second.class);
             startActivity(intent);
         });
 

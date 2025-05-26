@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/bgImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ground" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent">
+
+            <!-- Room Buttons and Indicators -->
+
+            <Button
+                android:id="@+id/btnRoom1"
+                android:layout_width="112dp"
+                android:layout_height="41dp"
+                android:layout_marginStart="276dp"
+                android:layout_marginTop="40dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintBottom_toTopOf="@id/btnRoomLast"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/btnRoom2"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <ImageView
+                android:id="@+id/indicatorRoom1"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginStart="372dp"
+                android:layout_marginTop="372dp"
+                android:src="@drawable/red_indicator"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btnRoom2"
+                android:layout_width="119dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="272dp"
+                android:layout_marginTop="324dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/indicatorRoom2"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginStart="372dp"
+                android:layout_marginTop="328dp"
+                android:src="@drawable/red_indicator"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btnRoom3"
+                android:layout_width="119dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="272dp"
+                android:layout_marginTop="276dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/indicatorRoom3"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginStart="372dp"
+                android:layout_marginTop="292dp"
+                android:src="@drawable/red_indicator"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btnRoom4"
+                android:layout_width="119dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="272dp"
+                android:layout_marginTop="240dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/indicatorRoom4"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginStart="372dp"
+                android:layout_marginTop="244dp"
+                android:src="@drawable/red_indicator"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btnAlvarado102"
+                android:layout_width="119dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="268dp"
+                android:layout_marginTop="104dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/indicatorAlvarado102"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginStart="372dp"
+                android:layout_marginTop="120dp"
+                android:src="@drawable/red_indicator"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btnRoom6"
+                android:layout_width="119dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="268dp"
+                android:layout_marginTop="60dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/indicatorRoom6"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginStart="372dp"
+                android:layout_marginTop="76dp"
+                android:src="@drawable/red_indicator"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btnScienceLab"
+                android:layout_width="119dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="268dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/indicatorScienceLab"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginStart="372dp"
+                android:layout_marginTop="32dp"
+                android:src="@drawable/red_indicator"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btnNB1B"
+                android:layout_width="119dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="284dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/indicatorNB1B"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginStart="132dp"
+                android:layout_marginTop="300dp"
+                android:src="@drawable/red_indicator"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btnNB1A"
+                android:layout_width="119dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="328dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/indicatorNB1A"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginStart="132dp"
+                android:layout_marginTop="344dp"
+                android:src="@drawable/red_indicator"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btnRoomLast"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="680dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</RelativeLayout>

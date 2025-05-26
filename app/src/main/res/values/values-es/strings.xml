@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CampusGo</string>
+    <string name="settings">Ajustes</string>
+    <string name="change_password">Cambiar Contraseña</string>
+    <string name="change_language">Cambiar Idioma</string>
+    <string name="notification_settings">Configuración de Notificaciones</string>
+    <string name="privacy_policy">Política de Privacidad</string>
+    <string name="select_language">Seleccionar Idioma</string>
+    <string name="cancel">Cancelar</string>
+</resources>

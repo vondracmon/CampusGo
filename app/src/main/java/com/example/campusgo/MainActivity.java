@@ -1,5 +1,6 @@
 package com.example.campusgo;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,6 +16,12 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
     Button signUpBtn, loginBtn;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        Context context = LocaleHelper.wrap(newBase); // wrap with locale
+        super.attachBaseContext(context);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

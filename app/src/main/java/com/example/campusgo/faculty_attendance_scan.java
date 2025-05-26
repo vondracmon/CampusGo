@@ -31,6 +31,7 @@ public class faculty_attendance_scan extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        LocaleHelper.applySavedLocale(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faculty_attendance_scan);
 
