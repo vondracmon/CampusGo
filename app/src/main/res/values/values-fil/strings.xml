@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CampusGo</string>
+    <string name="settings">Mga Setting</string>
+    <string name="change_password">Palitan ang Password</string>
+    <string name="change_language">Palitan ang Wika</string>
+    <string name="notification_settings">Mga Setting ng Notipikasyon</string>
+    <string name="privacy_policy">Patakaran sa Privacy</string>
+    <string name="select_language">Pumili ng Wika</string>
+    <string name="cancel">Kanselahin</string>
+</resources>

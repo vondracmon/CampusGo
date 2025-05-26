@@ -42,6 +42,7 @@ public class register_activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        LocaleHelper.applySavedLocale(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_screen);
 

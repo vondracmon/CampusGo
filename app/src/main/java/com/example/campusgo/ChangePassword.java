@@ -8,8 +8,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.AuthCredential;
 
 public class ChangePassword extends AppCompatActivity {
 
@@ -20,6 +22,7 @@ public class ChangePassword extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        LocaleHelper.applySavedLocale(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
 
@@ -49,25 +52,27 @@ public class ChangePassword extends AppCompatActivity {
                 return;
             }
 
-            // Re-authenticate user with current password first before changing password
-            // You need user's email to re-authenticate
-            String email = user.getEmail();
+            if (user != null && user.getEmail() != null) {
+                AuthCredential credential = EmailAuthProvider.getCredential(user.getEmail(), currentPass);
 
-            auth.signInWithEmailAndPassword(email, currentPass)
-                    .addOnSuccessListener(authResult -> {
-                        // Now update password
-                        user.updatePassword(newPass)
-                                .addOnSuccessListener(unused -> {
-                                    Toast.makeText(this, "Password changed successfully", Toast.LENGTH_SHORT).show();
-                                    finish(); // close activity
-                                })
-                                .addOnFailureListener(e ->
-                                        Toast.makeText(this, "Failed to change password: " + e.getMessage(), Toast.LENGTH_LONG).show()
-                                );
-                    })
-                    .addOnFailureListener(e ->
-                            Toast.makeText(this, "Authentication failed: " + e.getMessage(), Toast.LENGTH_LONG).show()
-                    );
+                // Re-authenticate the user before changing password
+                user.reauthenticate(credential)
+                        .addOnSuccessListener(aVoid -> {
+                            user.updatePassword(newPass)
+                                    .addOnSuccessListener(aVoid1 -> {
+                                        Toast.makeText(this, "Password changed successfully", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    })
+                                    .addOnFailureListener(e ->
+                                            Toast.makeText(this, "Failed to change password: " + e.getMessage(), Toast.LENGTH_LONG).show()
+                                    );
+                        })
+                        .addOnFailureListener(e ->
+                                Toast.makeText(this, "Authentication failed: " + e.getMessage(), Toast.LENGTH_LONG).show()
+                        );
+            } else {
+                Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 }

@@ -28,6 +28,7 @@ public class home_activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        LocaleHelper.applySavedLocale(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_screen);
 

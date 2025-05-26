@@ -88,6 +88,9 @@ dependencies {
 
     // Other
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+    //alarm
+    implementation ("androidx.work:work-runtime:2.9.0")
+
 
 }
 
