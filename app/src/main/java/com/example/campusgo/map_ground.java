@@ -37,16 +37,7 @@ public class map_ground extends AppCompatActivity {
         Button btnNB1B = findViewById(R.id.btnNB1B);
         Button btnScienceLab = findViewById(R.id.btnScienceLab);
 
-        // Indicators (make sure these are declared in XML layout with correct IDs)
-        View indRoom1 = findViewById(R.id.indicatorRoom1);
-        View indRoom2 = findViewById(R.id.indicatorRoom2);
-        View indRoom3 = findViewById(R.id.indicatorRoom3);
-        View indRoom4 = findViewById(R.id.indicatorRoom4);
-        View indRoom6 = findViewById(R.id.indicatorRoom6);
-        View indAlvarado102 = findViewById(R.id.indicatorAlvarado102);
-        View indNB1A = findViewById(R.id.indicatorNB1A);
-        View indNB1B = findViewById(R.id.indicatorNB1B);
-        View indScienceLab = findViewById(R.id.indicatorScienceLab);
+
 
         // Map buttons
         roomButtons.put("Room 1", btnRoom1);
@@ -59,16 +50,6 @@ public class map_ground extends AppCompatActivity {
         roomButtons.put("NB1B", btnNB1B);
         roomButtons.put("Science Laboratory", btnScienceLab);
 
-        // Map indicators
-        roomIndicators.put("Room 1", indRoom1);
-        roomIndicators.put("Room 2", indRoom2);
-        roomIndicators.put("Room 3", indRoom3);
-        roomIndicators.put("Room 4", indRoom4);
-        roomIndicators.put("Room 6", indRoom6);
-        roomIndicators.put("Alvarado 102", indAlvarado102);
-        roomIndicators.put("NB1A", indNB1A);
-        roomIndicators.put("NB1B", indNB1B);
-        roomIndicators.put("Science Laboratory", indScienceLab);
 
         // Set click listeners
         for (String roomName : roomButtons.keySet()) {

@@ -36,15 +36,6 @@
                 app:layout_constraintTop_toTopOf="@id/btnRoom2"
                 app:layout_constraintVertical_bias="0.0" />
 
-            <ImageView
-                android:id="@+id/indicatorRoom1"
-                android:layout_width="14dp"
-                android:layout_height="14dp"
-                android:layout_marginStart="372dp"
-                android:layout_marginTop="372dp"
-                android:src="@drawable/red_indicator"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/btnRoom2"
@@ -56,15 +47,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/indicatorRoom2"
-                android:layout_width="14dp"
-                android:layout_height="14dp"
-                android:layout_marginStart="372dp"
-                android:layout_marginTop="328dp"
-                android:src="@drawable/red_indicator"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/btnRoom3"
@@ -76,15 +58,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/indicatorRoom3"
-                android:layout_width="14dp"
-                android:layout_height="14dp"
-                android:layout_marginStart="372dp"
-                android:layout_marginTop="292dp"
-                android:src="@drawable/red_indicator"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+
 
             <Button
                 android:id="@+id/btnRoom4"
@@ -96,15 +70,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/indicatorRoom4"
-                android:layout_width="14dp"
-                android:layout_height="14dp"
-                android:layout_marginStart="372dp"
-                android:layout_marginTop="244dp"
-                android:src="@drawable/red_indicator"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+
 
             <Button
                 android:id="@+id/btnAlvarado102"
@@ -116,15 +82,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/indicatorAlvarado102"
-                android:layout_width="14dp"
-                android:layout_height="14dp"
-                android:layout_marginStart="372dp"
-                android:layout_marginTop="120dp"
-                android:src="@drawable/red_indicator"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+
 
             <Button
                 android:id="@+id/btnRoom6"
@@ -136,15 +94,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/indicatorRoom6"
-                android:layout_width="14dp"
-                android:layout_height="14dp"
-                android:layout_marginStart="372dp"
-                android:layout_marginTop="76dp"
-                android:src="@drawable/red_indicator"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/btnScienceLab"
@@ -156,15 +105,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/indicatorScienceLab"
-                android:layout_width="14dp"
-                android:layout_height="14dp"
-                android:layout_marginStart="372dp"
-                android:layout_marginTop="32dp"
-                android:src="@drawable/red_indicator"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/btnNB1B"
@@ -176,15 +116,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/indicatorNB1B"
-                android:layout_width="14dp"
-                android:layout_height="14dp"
-                android:layout_marginStart="132dp"
-                android:layout_marginTop="300dp"
-                android:src="@drawable/red_indicator"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+
 
             <Button
                 android:id="@+id/btnNB1A"
@@ -196,15 +128,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/indicatorNB1A"
-                android:layout_width="14dp"
-                android:layout_height="14dp"
-                android:layout_marginStart="132dp"
-                android:layout_marginTop="344dp"
-                android:src="@drawable/red_indicator"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+
 
             <Button
                 android:id="@+id/btnRoomLast"

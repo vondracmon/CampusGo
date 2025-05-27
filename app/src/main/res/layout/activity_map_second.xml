@@ -32,15 +32,7 @@
 
         <!-- Room 205A -->
 
-        <View
-            android:id="@+id/indicatorFoodLab"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginStart="372dp"
-            android:layout_marginTop="44dp"
-            android:background="@drawable/red_indicator"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+
 
         <Button
             android:id="@+id/btnRoom205A"
@@ -54,15 +46,6 @@
 
         <!-- Drawing Room -->
 
-        <View
-            android:id="@+id/indicatorRoom205A"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginStart="372dp"
-            android:layout_marginTop="92dp"
-            android:background="@drawable/red_indicator"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btnDrawingRoom"
@@ -79,15 +62,7 @@
 
         <!-- CPE Laboratory -->
 
-        <View
-            android:id="@+id/indicatorDrawingRoom"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginStart="372dp"
-            android:layout_marginTop="140dp"
-            android:background="@drawable/red_indicator"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+
 
         <Button
             android:id="@+id/btnCPELab"
@@ -101,15 +76,6 @@
 
         <!-- Computer Lab 2 -->
 
-        <View
-            android:id="@+id/indicatorCPELab"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginStart="376dp"
-            android:layout_marginTop="508dp"
-            android:background="@drawable/red_indicator"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btnCompLab2"
@@ -123,15 +89,7 @@
 
         <!-- Computer Lab 1 -->
 
-        <View
-            android:id="@+id/indicatorCompLab2"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginStart="376dp"
-            android:layout_marginTop="572dp"
-            android:background="@drawable/red_indicator"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+
 
         <Button
             android:id="@+id/btnCompLab1"
@@ -144,15 +102,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <!-- NB2B -->
-        <View
-            android:id="@+id/indicatorCompLab1"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginStart="376dp"
-            android:layout_marginTop="680dp"
-            android:background="@drawable/red_indicator"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+
 
         <Button
             android:id="@+id/btnNB2B"
@@ -166,15 +116,7 @@
 
         <!-- NB2A -->
 
-        <View
-            android:id="@+id/indicatorNB2B"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginStart="132dp"
-            android:layout_marginTop="348dp"
-            android:background="@drawable/red_indicator"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+
 
         <Button
             android:id="@+id/btnNB2A"
@@ -186,15 +128,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <View
-            android:id="@+id/indicatorNB2A"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginStart="132dp"
-            android:layout_marginTop="400dp"
-            android:background="@drawable/red_indicator"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

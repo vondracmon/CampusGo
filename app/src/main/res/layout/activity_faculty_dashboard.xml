@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/facultyDashboardLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_3"
@@ -14,76 +14,85 @@
         android:orientation="vertical"
         android:gravity="center_horizontal">
 
+        <!-- Profile Image -->
         <ImageView
             android:id="@+id/facultyProfileImage"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:src="@drawable/human_icon"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="40dp"
             android:background="@drawable/circle_background"
             android:scaleType="centerCrop" />
 
+        <!-- Welcome Text -->
         <TextView
             android:id="@+id/facultyWelcomeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Welcome, Faculty"
-            android:textColor="#ffffff"
-            android:textSize="20sp"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
             android:textStyle="bold"
             android:layout_marginTop="16dp" />
 
         <!-- Buttons Section -->
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSchedule"
+            style="@style/Widget.MaterialComponents.Button"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:text="📅 View Schedule"
-            android:layout_marginTop="32dp"
-            android:backgroundTint="#c90060"
-            android:textColor="#ffffff"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content"
+            android:text="View Schedule"
+            app:icon="@drawable/ic_schedule"
+            app:iconPadding="12dp"
+            app:iconGravity="textStart"
+            android:layout_marginTop="32dp" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnEditCalendar"
+            style="@style/Widget.MaterialComponents.Button"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:text="🗓️ Edit Calendar"
-            android:layout_marginTop="12dp"
-            android:backgroundTint="#c90060"
-            android:textColor="#ffffff"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content"
+            android:text="Edit Calendar"
+            app:icon="@drawable/ic_calendar"
+            app:iconPadding="12dp"
+            app:iconGravity="textStart"
+            android:layout_marginTop="12dp" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnEditRoom"
+            style="@style/Widget.MaterialComponents.Button"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:text="🏫 Edit Room Availability"
-            android:layout_marginTop="12dp"
-            android:backgroundTint="#c90060"
-            android:textColor="#ffffff"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content"
+            android:text="Edit Room Availability"
+            app:icon="@drawable/ic_room"
+            app:iconPadding="12dp"
+            app:iconGravity="textStart"
+            android:layout_marginTop="12dp" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnViewAttendance"
+            style="@style/Widget.MaterialComponents.Button"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:text="✅ View Attendance"
-            android:layout_marginTop="12dp"
-            android:backgroundTint="#c90060"
-            android:textColor="#ffffff"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content"
+            android:text="View Attendance"
+            app:icon="@drawable/ic_check"
+            app:iconPadding="12dp"
+            app:iconGravity="textStart"
+            android:layout_marginTop="12dp" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/logoutButton"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:text="🚪 Logout"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            app:icon="@drawable/ic_logout"
+            app:iconPadding="12dp"
+            app:iconGravity="textStart"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="32dp"
-            android:backgroundTint="#9e003f"
-            android:textColor="#ffffff"
-            android:textStyle="bold" />
-
+            android:textColor="#FFFFFF"
+            app:strokeColor="@color/white"
+            app:strokeWidth="1dp" />
     </LinearLayout>
 </ScrollView>
