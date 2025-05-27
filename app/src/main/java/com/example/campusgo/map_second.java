@@ -36,15 +36,6 @@ public class map_second extends AppCompatActivity {
         Button btnNB2B = findViewById(R.id.btnNB2B);
         Button btnNB2A = findViewById(R.id.btnNB2A);
 
-        // Indicators
-        View indFoodLab = findViewById(R.id.indicatorFoodLab);
-        View indRoom205A = findViewById(R.id.indicatorRoom205A);
-        View indDrawingRoom = findViewById(R.id.indicatorDrawingRoom);
-        View indCPELab = findViewById(R.id.indicatorCPELab);
-        View indCompLab2 = findViewById(R.id.indicatorCompLab2);
-        View indCompLab1 = findViewById(R.id.indicatorCompLab1);
-        View indNB2B = findViewById(R.id.indicatorNB2B);
-        View indNB2A = findViewById(R.id.indicatorNB2A);
 
         roomButtons.put("Food Laboratory", btnFoodLab);
         roomButtons.put("Room 205A", btnRoom205A);
@@ -55,14 +46,6 @@ public class map_second extends AppCompatActivity {
         roomButtons.put("NB2B", btnNB2B);
         roomButtons.put("NB2A", btnNB2A);
 
-        roomIndicators.put("Food Laboratory", indFoodLab);
-        roomIndicators.put("Room 205A", indRoom205A);
-        roomIndicators.put("Drawing Room", indDrawingRoom);
-        roomIndicators.put("CPE Laboratory", indCPELab);
-        roomIndicators.put("Computer Laboratory 2", indCompLab2);
-        roomIndicators.put("Computer Laboratory 1", indCompLab1);
-        roomIndicators.put("NB2B", indNB2B);
-        roomIndicators.put("NB2A", indNB2A);
 
         for (String roomName : roomButtons.keySet()) {
             Button btn = roomButtons.get(roomName);

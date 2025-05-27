@@ -18,74 +18,41 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CampusGo"
         tools:targetApi="31">
-        <activity
-            android:name=".map_second"
-            android:exported="false" />
-        <activity
-            android:name=".map_ground"
-            android:exported="false" />
-        <activity
-            android:name=".FacultyRoomAvailable"
-            android:exported="false" />
-        <activity
-            android:name=".faculty_attendance_scan"
-            android:exported="false" />
-        <activity
-            android:name=".qr_scanner"
-            android:exported="false" />
-        <activity
-            android:name=".uploadImage"
-            android:exported="false" />
-        <activity
-            android:name=".ground_map"
-            android:exported="false"
-            android:theme="@style/Theme.CampusGo" />
-        <activity
-            android:name=".AdminView"
-            android:exported="false" />
-        <activity
-            android:name=".room_available"
-            android:exported="false" />
+
+        <!-- Your existing activities -->
+        <activity android:name=".map_second" android:exported="false" />
+        <activity android:name=".map_ground" android:exported="false" />
+        <activity android:name=".FacultyRoomAvailable" android:exported="false" />
+        <activity android:name=".faculty_attendance_scan" android:exported="false" />
+        <activity android:name=".qr_scanner" android:exported="false" />
+        <activity android:name=".uploadImage" android:exported="false" />
+        <activity android:name=".ground_map" android:exported="false" android:theme="@style/Theme.CampusGo" />
+        <activity android:name=".AdminView" android:exported="false" />
+        <activity android:name=".room_available" android:exported="false" />
         <activity android:name=".floor" />
-        <activity
-            android:name=".qr"
-            android:exported="false" />
-        <activity
-            android:name=".FacultyLogin"
-            android:exported="true" />
-        <activity
-            android:name=".FacultyDashboard"
-            android:exported="true" />
-        <activity
-            android:name=".FacultySchedule"
-            android:exported="true" />
-        <activity
-            android:name=".ChangePassword"
-            android:exported="true" />
-
-
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
+        <activity android:name=".qr" android:exported="false" />
+        <activity android:name=".FacultyLogin" android:exported="true" />
+        <activity android:name=".FacultyDashboard" android:exported="true" />
+        <activity android:name=".FacultySchedule" android:exported="true" />
+        <activity android:name=".ChangePassword" android:exported="true" />
+        <activity android:name=".MainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".register_activity"
-            android:exported="true" />
-        <activity
-            android:name=".login_activity"
-            android:exported="true" />
-        <activity
-            android:name=".home_activity"
-            android:exported="true" />
+        <activity android:name=".register_activity" android:exported="true" />
+        <activity android:name=".login_activity" android:exported="true" />
+        <activity android:name=".home_activity" android:exported="true" />
         <activity android:name=".ImageViewerActivity" />
         <activity android:name=".second_floor_map" />
         <activity android:name=".AdminCalendar" />
         <activity android:name=".Settings" />
+
+        <!-- Add the broadcast receivers here -->
+        <receiver android:name=".OvertimeNotificationReceiver" />
+        <receiver android:name=".RoomResetReceiver" />
+
     </application>
 
 </manifest>
